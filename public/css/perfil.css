@@ -1,0 +1,44 @@
+#banner {
+    background-image: url("../images/fundoroxo.jpg");
+    width: 100%;
+    height: 150px;
+}
+
+.banner-info {
+    margin-top: -126px;
+}
+
+.user-infos {
+    margin-left: 5%;
+    margin-top: -25px;
+}
+
+.img-seguidres {
+    width: 40px;
+    height: 40px;
+}
+
+.max-content-width {
+    width: max-content;
+}
+
+.margin-nome {
+    padding-left: 0px;
+    margin-top: 5px;
+}
+
+.card-seguidores {
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.link-perfil {
+    color: black;
+    text-decoration: none;
+}
+
+.link-abas {
+    color: white;
+    text-decoration: none;
+}

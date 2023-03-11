@@ -1,0 +1,27 @@
+.posicao {
+    background-color: yellow;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: black;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    vertical-align: top;
+}
+
+.posicao10 {
+    background-color: yellow;
+    border-radius: 50%;
+    width: max-content;
+    height: max-content;
+    color: black;
+    padding: 4px;
+    margin: 5px;
+}
+
+.card-footer {
+    background-color: initial;
+    border-top: none;
+}
