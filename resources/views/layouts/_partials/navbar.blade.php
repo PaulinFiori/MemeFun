@@ -119,16 +119,7 @@
                 @endif
 
                 <div class="dropdown-menu dropwdown-perfil">
-                    @if(auth()->user() == null)
-                        <a class="dropdown-item" href="{{route('login')}}">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Entrar
-                        </a>
-                        <a class="dropdown-item" href="{{route('cadastro')}}">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Registrar-se
-                        </a>
-                    @else
+                    @if(auth()->user() != null)
                         <a class="dropdown-item" href="{{route('perfil')}}">
                             <i class="fa-solid fa-user"></i>
                             Perfil
@@ -148,6 +139,15 @@
                         <a class="dropdown-item" href="{{route('sair')}}">
                             <i class="fa-solid fa-right-from-bracket"></i>
                             Sair
+                        </a>
+                    @else
+                        <a class="dropdown-item" href="{{route('login')}}">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Entrar
+                        </a>
+                        <a class="dropdown-item" href="{{route('cadastro')}}">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Registrar-se
                         </a>
                     @endif
                 </div>
