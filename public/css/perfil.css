@@ -1,5 +1,4 @@
 #banner {
-    background-image: url("../images/fundoroxo.jpg");
     width: 100%;
     height: 150px;
 }
@@ -39,6 +38,7 @@
 }
 
 .link-abas {
-    color: white;
+    color: black;
+    font-weight: bold;
     text-decoration: none;
 }
