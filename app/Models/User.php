@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class User extends Authenticatable
 {
@@ -43,4 +44,40 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function seguidores() {
+        return $this->hasMany(Seguidores::class);
+    }
+
+    public function seguindo() {
+        return $this->hasMany(Seguindo::class);
+    }
+
+    public function comentariosPost() {
+        return $this->hasMany(ComentarioPost::class);
+    }
+
+    public function comentariosMeme() {
+        return $this->hasMany(ComentarioMeme::class);
+    }
+
+    public function curtidasMeme() {
+        return $this->hasMany(curtidaMeme::class);
+    }
+
+    public function curtidasPost() {
+        return $this->hasMany(CurtidaPost::class);
+    }
+
+    public function memes() {
+        return $this->hasMany(Meme::class);
+    }
+
+    public function post() {
+        return $this->hasMany(Post::class);
+    }
+
+    public function usuariosTags() {
+        return $this->hasMany(UserTag::class);
+    }
 }

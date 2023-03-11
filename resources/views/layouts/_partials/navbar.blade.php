@@ -108,13 +108,13 @@
             </div>
 
             <div class="dropdown">
-                @if(false)
+                @if(auth()->user() != null)
                     <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle" height="25" alt="User Photo" loading="lazy"/>
+                        <img src="{{ config('app.url'). '/' . auth()->user()->foto }}" class="rounded-circle" height="25" alt="User Foto" loading="lazy"/>
                     </a>
                 @else
                     <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy"/>
+                        <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle" height="25" alt="User Photo" loading="lazy"/>
                     </a>
                 @endif
 

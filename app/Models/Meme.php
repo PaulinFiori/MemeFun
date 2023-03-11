@@ -13,4 +13,8 @@ class meme extends Model
     
     protected $table = 'meme';
     protected $fillable = ['titulo', 'descricao', 'anexo', 'user_id'];
+
+    public function usuario() {
+        return $this->hasOne(User::class);
+    }
 }
