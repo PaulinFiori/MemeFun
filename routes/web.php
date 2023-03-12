@@ -56,6 +56,7 @@ Route::controller(NotificacaoController::class)->group(function() {
 Route::controller(PerfilController::class)->group(function() {
     Route::get('/perfil', 'perfil')->name("perfil");
     Route::get('/editar-perfil', 'editarPerfil')->name("editar-perfil");
+    Route::post('/editar-perfil', 'salvarEditarPerfil')->name("editar-perfil");
     Route::get('/configuracoes', 'configuracoes')->name("configuracoes");
     Route::post('/sair', 'sair')->name("sair");
 });
