@@ -136,10 +136,17 @@
                             <i class="fa-solid fa-trophy"></i>
                             Ranking
                         </a>
-                        <a class="dropdown-item" href="{{route('sair')}}">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Sair
-                        </a>
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Sair
+                            </a>
+                        </form>
                     @else
                         <a class="dropdown-item" href="{{route('login')}}">
                             <i class="fa-solid fa-right-from-bracket"></i>
