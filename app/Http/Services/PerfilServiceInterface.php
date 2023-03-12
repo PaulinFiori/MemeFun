@@ -6,4 +6,5 @@ use Illuminate\Http\Request;
 
 interface PerfilServiceInterface
 {
+    function editar(Request $request);
 }

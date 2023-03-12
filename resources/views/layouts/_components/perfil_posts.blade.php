@@ -225,5 +225,5 @@
         </div>
     </div>
 @else
-    <p class="font-weight-bold text-center mb-3 mt-3">Esse usuário não tem memes</p>
+    <p class="font-weight-bold text-center mb-3 mt-3">Esse usuário postou nenhum meme.</p>
 @endif
