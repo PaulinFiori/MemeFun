@@ -102,6 +102,7 @@
 }
 
 .cardbox .cardbox-item img {
+    width: 100%;
 }
 
 .img-responsive {

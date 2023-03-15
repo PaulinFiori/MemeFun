@@ -16,7 +16,11 @@ class PerfilController extends Controller
 
 
     public function perfil() {
-        return view("perfil");
+        $memes = $this->perfilService->buscarMemes();
+
+        return view("perfil", [
+            "memes" => $memes
+        ]);
     }
 
     public function editarPerfil() {

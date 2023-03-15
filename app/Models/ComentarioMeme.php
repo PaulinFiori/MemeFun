@@ -15,10 +15,10 @@ class ComentarioMeme extends Model
     protected $fillable = ['user_id', 'meme_id' , 'descricao'];
 
     public function usuario() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 
     public function meme() {
-        return $this->hasOne(Meme::class);
+        return $this->belongsTo(Meme::class, "meme_id", "id");
     }
 }

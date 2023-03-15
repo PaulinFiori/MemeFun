@@ -5,7 +5,6 @@
 @section('conteudo')
     <link rel="stylesheet" href="{{ asset('css/configuracoes.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/checkbox.css') }}"/>
-    @vite(['resources/sass/checkbox.scss'])
 
     <div class="container mt-3">
         <form method="POST" action="">
@@ -17,6 +16,10 @@
                     <span class="slider round"></span>
                 </label>
                 <label>Modo Escuro</label>
+            </div>
+
+            <div class="mb-3">
+                <p>Cor do texto no perfil</p>
             </div>
         </form>
     </div>

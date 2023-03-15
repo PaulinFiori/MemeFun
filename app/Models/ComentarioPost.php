@@ -15,10 +15,10 @@ class ComentarioPost extends Model
     protected $fillable = ['user_id', 'post_id' , 'descricao'];
 
     public function usuario() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 
     public function post() {
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Post::class, "post_id", "id");
     }
 }

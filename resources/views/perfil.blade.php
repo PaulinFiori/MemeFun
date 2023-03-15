@@ -24,7 +24,7 @@
             @else
                 <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle" width="100px" heigth="100px">
             @endif
-            <span class="font-weight-bold">{{ auth()->user()->name }}</span>
+            <span class="font-weight-bold link-perfil">{{ auth()->user()->name }}</span>
             <br>
             <div class="d-flex user-infos text-center">
                 <a class="mx-5 link-abas" href="{{config('app.url')}}/perfil?posts">{{ count(auth()->user()->memes) }} <br> Posts</a>
@@ -34,7 +34,7 @@
         </div>
 
         @if(isset($_GET["posts"]) || (!isset($_GET["posts"]) && !isset($_GET["seguidores"]) && !isset($_GET["seguindo"])))
-            @component('layouts._components.perfil_posts')
+            @component('layouts._components.perfil_posts', ['memes' => $memes])
             @endcomponent
         @elseif(isset($_GET["seguidores"]))
             @component('layouts._components.perfil_seguidores')
