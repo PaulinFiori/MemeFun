@@ -3,7 +3,8 @@
 namespace App\Http\Services;
 
 use Illuminate\Http\Request;
-use App\Models\SiteContato;
+use App\Models\User;
+use App\Models\Meme;
 
 class PerfilService implements PerfilServiceInterface
 {
@@ -61,5 +62,9 @@ class PerfilService implements PerfilServiceInterface
 
             return true;
         }
+    }
+
+    public function buscarMemes() {
+        return Meme::where("user_id", auth()->user()->id)->orderBy("created_at", "desc")->get();
     }
 }

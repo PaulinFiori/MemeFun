@@ -3,8 +3,8 @@
 namespace App\Http\Services;
 
 use Illuminate\Http\Request;
-use App\Models\SiteContato;
 
-class HomeService implements HomeServiceInterface
+interface HomeServiceInterface
 {
+    function buscarMemes();
 }

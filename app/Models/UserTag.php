@@ -17,4 +17,8 @@ class usuarioTag extends Model
     public function tag() {
         return $this->hasMany(Tag::class);
     }
+
+    public function usuario() {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
 }
