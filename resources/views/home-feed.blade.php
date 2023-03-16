@@ -17,11 +17,12 @@
                                     <em class="fa fa-ellipsis-h"></em>
                                 </button>
                                 <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    @if(auth()->user()->tipo == "A" || $meme->user_id == auth()->user()->id)
-                                        <a class="dropdown-item" href="#">Excluir</a>
-                                    @else
-                                        <a class="dropdown-item" href="#">Reportar</a>
-                                    @endif
+                                    @auth
+                                        @if(auth()->user()->tipo == "A" || $meme->user_id == auth()->user()->id)
+                                            <a class="dropdown-item" href="#">Excluir</a>
+                                        @endif
+                                    @endauth
+                                    <a class="dropdown-item" href="#">Reportar</a>
                                 </div>
                             </div>
                             <div class="media m-0">
@@ -114,7 +115,11 @@
                                 
                                 <span class="comment-avatar float-left">
                                     <a>
-                                        <img class="rounded-circle" src="{{ auth()->user()->foto }}" alt="...">
+                                        @if(auth()->user() != null)
+                                            <img class="rounded-circle" src="{{ auth()->user()->foto }}" alt="...">
+                                        @else
+                                            <img class="rounded-circle" src="{{ asset('images/default-user.jpg') }}" alt="...">
+                                        @endif
                                     </a>                            
                                 </span>
                                 <!--start Search -->
