@@ -122,7 +122,7 @@
 
                 <div class="dropdown-menu dropwdown-perfil">
                     @if(auth()->user() != null)
-                        <a class="dropdown-item" href="{{route('perfil')}}">
+                        <a class="dropdown-item" href="{{route('perfil', [auth()->user()->id])}}">
                             <i class="fa-solid fa-user"></i>
                             Perfil
                         </a>

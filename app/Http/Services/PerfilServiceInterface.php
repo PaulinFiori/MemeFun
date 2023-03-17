@@ -8,5 +8,7 @@ interface PerfilServiceInterface
 {
     function editar(Request $request);
 
-    function buscarMemes();
+    function buscarMemes($id);
+
+    function buscarUsuario($id);
 }

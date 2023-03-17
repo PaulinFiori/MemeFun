@@ -13,4 +13,12 @@ class Seguidores extends Model
         'user_id',
         'user_seguidor_id'
     ];
+
+    public function usuario() {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
+
+    public function seguidor() {
+        return $this->hasOne(User::class, "id", "user_seguidor_id");
+    }
 }
