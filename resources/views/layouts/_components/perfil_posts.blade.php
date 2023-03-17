@@ -1,4 +1,4 @@
-@if(count(auth()->user()->memes))
+@if($usuario->memes)
     <div class="mt-2 mb-5 mx-1">
         <div class="filter bg-white float-right d-flex align-items-center justify-content-center">
             <span>Populares</span>
@@ -37,11 +37,11 @@
                         <div class="media m-0">
                             <div class="d-flex mr-3">
                                 <a href="">
-                                    <img class="img-fluid rounded-circle" src="{{ auth()->user()->foto }}" alt="User">
+                                    <img class="img-fluid rounded-circle" src="{{ config('app.url') . '/' . $usuario->foto }}" alt="User">
                                 </a>
                             </div>
                             <div class="media-body">
-                                <p class="m-0">{{ auth()->user()->name }}</p>
+                                <p class="m-0">{{ $usuario->name }}</p>
                                 <small><span><i class="icon ion-md-time"></i> {{ \Carbon\Carbon::parse($meme->created_at)->diffForHumans() }} </span></small>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="cardbox-item">
-                            <img class="img-fluid" src="{{ $meme->anexo }}" alt="Image">
+                            <img class="img-fluid" src="{{ config('app.url') . '/' . $meme->anexo }}" alt="Image">
                         </div>
 
                         <div class="cardbox-item">
@@ -119,8 +119,8 @@
                             
                             <span class="comment-avatar float-left">
                                 <a>
-                                    @if(auth()->user() != null)
-                                            <img class="rounded-circle" src="{{ auth()->user()->foto }}" alt="...">
+                                    @if($usuario != null)
+                                            <img class="rounded-circle" src="{{ $usuario->foto }}" alt="...">
                                         @else
                                             <img class="rounded-circle" src="{{ asset('images/default-user.jpg') }}" alt="...">
                                         @endif

@@ -52,6 +52,10 @@ body {
     font-weight: bold;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 /* Checkbock */
 .switch {
     position: relative;

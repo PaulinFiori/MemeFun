@@ -26,13 +26,13 @@
                                 </div>
                             </div>
                             <div class="media m-0">
-                                <div class="d-flex mr-3">
+                                <div class="d-flex mr-3 cursor-pointer">
                                     <a href="">
                                         <img class="img-fluid rounded-circle" src="{{ $meme->usuario->foto }}" alt="User">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <p class="m-0">{{ $meme->usuario->name }}</p>
+                                    <p class="m-0 cursor-pointer">{{ $meme->usuario->name }}</p>
                                     <small>
                                         <span>
                                             <i class="icon ion-md-time"></i>

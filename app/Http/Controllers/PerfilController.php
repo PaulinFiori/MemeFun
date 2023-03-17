@@ -16,10 +16,13 @@ class PerfilController extends Controller
 
 
     public function perfil() {
-        $memes = $this->perfilService->buscarMemes();
+        $id = explode('perfil/', url()->current())[1];
+        $memes = $this->perfilService->buscarMemes($id);
+        $usuario = $this->perfilService->buscarUsuario($id);
 
         return view("perfil", [
-            "memes" => $memes
+            "memes" => $memes,
+            "usuario" => $usuario
         ]);
     }
 
