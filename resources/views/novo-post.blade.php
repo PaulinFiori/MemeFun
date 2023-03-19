@@ -10,6 +10,8 @@
         <form method="POST" action="" class="login100-form validate-form modal-novo" enctype="multipart/form-data">
             @csrf
 
+            <h1 class="mb-5">Novo Meme</h1>
+
             <div class="wrap-input100 validate-input" data-validate="Selecione uma imagem">
                 <input class="input100" type="file" name="arquivo" accept="image/*, video/*">
                 <span class="focus-input100" data-placeholder="Arquivo"></span>

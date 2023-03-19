@@ -6,4 +6,7 @@ use Illuminate\Http\Request;
 
 interface ComunidadeServiceInterface
 {
+    function buscarPostComunidade();
+    
+    function salvarPostComunidade($request);
 }

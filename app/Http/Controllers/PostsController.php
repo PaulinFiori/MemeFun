@@ -24,10 +24,6 @@ class PostsController extends Controller
         return redirect()->route("home");
     }
 
-    public function novoPostComunidade() {
-        return view("novo-post-comunidade");
-    }
-
     public function memeEspecifico($id) {
         return view("meme-especifico");
     }

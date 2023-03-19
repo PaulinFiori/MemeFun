@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="cardbox-item">
-                                <img class="img-fluid" src="{{ $meme->anexo }}" alt="Image">
+                                <img class="img-fluid" src="{{ config('app.url') . '/' . $meme->anexo }}" alt="Image">
                             </div>
 
                             <div class="cardbox-item">

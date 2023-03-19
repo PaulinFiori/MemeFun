@@ -38,13 +38,14 @@ Route::controller(SeguidoresController::class)->group(function() {
 
 Route::controller(ComunidadeController::class)->group(function() {
     Route::get('/comunidade', 'comunidades')->name("comunidades");
+
+    Route::get('/novo-post-comunidade', 'novoPostComunidade')->name("novo-post-comunidade");
+    Route::post('/novo-post-comunidade', 'salvarNovoPostComunidade')->name("novo-post-comunidade");
 });
 
 Route::controller(PostsController::class)->group(function() {
     Route::get('/novo-post', 'novoPost')->name("novo-post");
     Route::post('/novo-post', 'salvarNovoPost')->name("novo-post");
-    Route::get('/novo-post-comunidade', 'novoPostComunidade')->name("novo-post-comunidade");
-    Route::post('/novo-post-comunidade', 'novoPostComunidade')->name("novo-post-comunidade");
 
     Route::get('/meme/{id}', 'memeEspecifico')->name("meme-especifico");
 });
