@@ -59,7 +59,8 @@ Route::controller(PerfilController::class)->group(function() {
     Route::get('/editar-perfil', 'editarPerfil')->name("editar-perfil");
     Route::post('/editar-perfil', 'salvarEditarPerfil')->name("editar-perfil");
     Route::get('/configuracoes', 'configuracoes')->name("configuracoes");
-    Route::post('/sair', 'sair')->name("sair");
+    Route::post('/seguir', 'seguir')->name("seguir");
+    Route::post('/deseguir', 'deseguir')->name("deseguir");
 });
 
 Route::controller(RankingController::class)->group(function() {

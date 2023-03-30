@@ -126,10 +126,6 @@
                             <i class="fa-solid fa-user"></i>
                             Perfil
                         </a>
-                        <a class="dropdown-item" href="{{route('editar-perfil')}}">
-                            <i class="fa-solid fa-user-pen"></i>
-                            Editar Perfil
-                        </a>
                         <a class="dropdown-item" href="{{route('configuracoes')}}">
                             <i class="fa-solid fa-gear"></i>
                             Configurações

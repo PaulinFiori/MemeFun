@@ -11,7 +11,7 @@ class Seguidores extends Model
 
     protected $fillable = [
         'user_id',
-        'user_seguidor_id'
+        'seguido_por'
     ];
 
     public function usuario() {
@@ -19,6 +19,6 @@ class Seguidores extends Model
     }
 
     public function seguidor() {
-        return $this->hasOne(User::class, "id", "user_seguidor_id");
+        return $this->hasOne(User::class, "id", "seguido_por");
     }
 }

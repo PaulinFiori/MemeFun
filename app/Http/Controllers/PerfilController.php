@@ -40,7 +40,15 @@ class PerfilController extends Controller
         return view("configuracoes");
     }
 
-    public function sair() {
-        
+    public function seguir(Request $request) {
+        $this->perfilService->seguir($request->usuario_id);
+
+        return response()->json('true');
+    }
+
+    public function deseguir(Request $request) {
+        $this->perfilService->deseguir($request->usuario_id);
+
+        return response()->json('true');
     }
 }

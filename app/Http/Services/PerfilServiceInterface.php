@@ -11,4 +11,8 @@ interface PerfilServiceInterface
     function buscarMemes($id);
 
     function buscarUsuario($id);
+
+    function seguir($id);
+
+    function deseguir($id);
 }
