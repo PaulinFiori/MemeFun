@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 /* ------------------------------- */
 /* Cardbox Heading
 ---------------------------------- */
@@ -102,6 +106,7 @@
 }
 
 .cardbox .cardbox-item img {
+    width: 100%;
 }
 
 .img-responsive {

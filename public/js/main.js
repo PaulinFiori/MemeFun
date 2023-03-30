@@ -15,3 +15,8 @@ $(document).ready(function() {
         }
     });
 });
+
+function verComentario(id) {
+    id = "#" + id;
+    $(id).toggleClass('d-none');
+}

@@ -13,4 +13,12 @@ class usuarioTag extends Model
     
     protected $table = 'user_tag';
     protected $fillable = ['user_id', 'tag_id'];
+
+    public function tag() {
+        return $this->hasMany(Tag::class);
+    }
+
+    public function usuario() {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
 }
