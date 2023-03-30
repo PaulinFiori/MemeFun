@@ -65,29 +65,29 @@
                         <div class="cardbox-base">
                             <ul class="float-right">
                                 <li onclick="verComentario('comentarios-{{$meme->id}}')">
-                                    <a>
+                                    <a class="cursor-pointer">
                                         <i class="fa fa-comments"></i>
                                     </a>
                                 </li>
                                 <li onclick="verComentario('comentarios-{{$meme->id}}')">
-                                    <a>
+                                    <a class="cursor-pointer">
                                         <em class="mr-2-rem">{{ count($meme->comentarios) }}</em>
                                     </a>
                                 </li>
                                 <li>
-                                    <a>
+                                    <a class="cursor-pointer">
                                         <i class="fa fa-share-alt"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a>
+                                    <a class="cursor-pointer">
                                         <i class="fa-solid fa-circle-down no-margin-right"></i>
                                     </a>
                                 </li>
                             </ul>
                             <ul>
                                 <li>
-                                    <a>
+                                    <a class="cursor-pointer">
                                         <i class="fa fa-thumbs-up"></i>
                                         <span class="ml-menus-5-percent">{{ count($meme->curtidas) }} Curtida(s)</span>
                                     </a>
@@ -104,7 +104,11 @@
                                     <div class="d-flex mb-3">
                                         <span class="comment-avatar float-left">
                                             <a>
-                                                <img class="rounded-circle" src="{{ $comentario->usuario->foto }}" alt="...">
+                                                @if($comentario->usuario->foto)
+                                                    <img class="rounded-circle" src="{{ config('app.url') }}/{{ $comentario->usuario->foto }}" alt="...">
+                                                @else
+                                                    <img class="rounded-circle" src="{{ asset('images/default-user.jpg') }}" alt="...">
+                                                @endif
                                             </a>                            
                                         </span>
                                         <div class="comment me-3 float-right mt-10">
@@ -120,10 +124,10 @@
                             <span class="comment-avatar float-left">
                                 <a>
                                     @if($usuario != null)
-                                            <img class="rounded-circle" src="{{ $usuario->foto }}" alt="...">
-                                        @else
-                                            <img class="rounded-circle" src="{{ asset('images/default-user.jpg') }}" alt="...">
-                                        @endif
+                                        <img class="rounded-circle" src="{{ config('app.url') }}/{{ $usuario->foto }}" alt="...">
+                                    @else
+                                        <img class="rounded-circle" src="{{ asset('images/default-user.jpg') }}" alt="...">
+                                    @endif
                                 </a>                            
                             </span>
                             <!--start Search -->

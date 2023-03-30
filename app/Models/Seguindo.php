@@ -13,7 +13,7 @@ class Seguindo extends Model
 
     protected $fillable = [
         'user_id',
-        'user_seguindo_id'
+        'user_seguindo'
     ];
 
     public function usuario() {
@@ -21,6 +21,6 @@ class Seguindo extends Model
     }
 
     public function seguindo() {
-        return $this->hasOne(User::class, "id", "user_seguindo_id");
+        return $this->hasOne(User::class, "id", "user_seguindo");
     }
 }

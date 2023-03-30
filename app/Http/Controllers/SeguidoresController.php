@@ -17,6 +17,14 @@ class SeguidoresController extends Controller
     public function seguidores() {
         $memes = $this->seguidoresService->memesSeguidores();
 
+        if(auth()->user() == null) {
+            return view("seguidores", [
+                'error' => true,
+                'mensagem' => "Faça login para ver os memes!",
+                'memes' => $memes
+            ]);
+        }
+
         return view("seguidores", ['memes' => $memes]);
     }
 }

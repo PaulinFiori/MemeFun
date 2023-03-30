@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{{ asset('css/posts.css') }}"/>
 
     <div class="container mt-3">
+        @if($error)
+            <script>
+                $(document).ready(function() {
+                    toastr.error('{{$mensagem}}', 'Error!');
+                });
+            </script>
+        @endif
+
         @if(count($memes) > 0)
             @foreach ($memes as $meme)
                 <div class="row mb-5">
@@ -57,33 +65,44 @@
                                 <!--/ cardbox-item -->
 
                                 <!-- start cardbox-base -->
+                                @php
+                                    $curtiuMeme = false;
+                                    if(auth()->user() != null) {
+                                        foreach ($meme->curtidas as $curtida) {
+                                            if($curtida->user_id == auth()->user()->id) {
+                                                $curtiuMeme = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                @endphp
                                 <div class="cardbox-base">
                                     <ul class="float-right">
                                         <li onclick="verComentario('comentarios-{{$meme->id}}')">
-                                            <a>
+                                            <a class="cursor-pointer">
                                                 <i class="fa fa-comments"></i>
                                             </a>
                                         </li>
                                         <li onclick="verComentario('comentarios-{{$meme->id}}')">
-                                            <a>
+                                            <a class="cursor-pointer">
                                                 <em class="mr-2-rem">{{ count($meme->comentarios) }}</em>
                                             </a>
                                         </li>
                                         <li>
-                                            <a>
+                                            <a class="cursor-pointer">
                                                 <i class="fa fa-share-alt"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a>
+                                            <a class="cursor-pointer">
                                                 <i class="fa-solid fa-circle-down no-margin-right"></i>
                                             </a>
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
-                                            <a>
-                                                <i class="fa fa-thumbs-up"></i>
+                                            <a class="cursor-pointer">
+                                                <i class="fa fa-thumbs-up {{$curtiuMeme ? 'text-primary' : '' }}"></i>
                                                 <span class="ml-menus-5-percent">{{ count($meme->curtidas) }} Curtida(s)</span>
                                             </a>
                                         </li>

@@ -5,6 +5,9 @@ namespace App\Http\Services;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Meme;
+use App\Models\Seguindo;
+use App\Models\Seguidores;
+use Illuminate\Support\Facades\DB;
 
 class PerfilService implements PerfilServiceInterface
 {
@@ -70,5 +73,46 @@ class PerfilService implements PerfilServiceInterface
 
     public function buscarUsuario($id) {
         return User::find($id);
+    }
+
+    public function seguir($id) {
+        DB::beginTransaction();
+        try {
+            Seguindo::create([
+                'user_seguindo' => $id,
+                'user_id' => auth()->user()->id
+            ]);
+
+            Seguidores::create([
+                'user_id' => $id,
+                'seguido_por' => auth()->user()->id
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
+    }
+
+    public function deseguir($id) {
+
+        DB::beginTransaction();
+        try {
+            $seguindo = Seguindo::where("user_seguindo", $id)
+                ->where("user_id", auth()->user()->id)
+                ->first();
+                
+            $seguindo->delete();
+
+            $seguidor = Seguidores::where("user_id", $id)
+                ->where("seguido_por", auth()->user()->id)
+                ->first();
+
+            $seguidor->delete();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
     }
 }
