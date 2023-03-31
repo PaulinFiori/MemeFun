@@ -66,8 +66,8 @@ class CadastrarService implements CadastrarServiceInterface
 
             $usuario->save();
 
-            //TODO: enviar email para o usuario
-            Mail::to($usuario->email)->send(new BemVindoMail($usuario));
+            $usuario->sendBemVindoNotification();
+            //Mail::to($usuario->email)->send(new BemVindoMail($usuario));
 
             return "Cadastrado com sucesso";
         }

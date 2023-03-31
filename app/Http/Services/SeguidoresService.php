@@ -12,7 +12,7 @@ class SeguidoresService implements SeguidoresServiceInterface
             return Meme::select('meme.*')
             ->join('users', 'meme.user_id', '=', 'users.id')
             ->join('seguidores', 'users.id', '=', 'seguidores.user_id')
-            ->where('seguidores.user_seguidor_id', 0)
+            ->where('seguidores.seguido_por', 0)
             ->orderBy("meme.created_at", "desc")
             ->get();
         }
@@ -20,7 +20,7 @@ class SeguidoresService implements SeguidoresServiceInterface
         return Meme::select('meme.*')
             ->join('users', 'meme.user_id', '=', 'users.id')
             ->join('seguidores', 'users.id', '=', 'seguidores.user_id')
-            ->where('seguidores.user_seguidor_id', auth()->user()->id)
+            ->where('seguidores.seguido_por', auth()->user()->id)
             ->orderBy("meme.created_at", "desc")
             ->get();
     }
