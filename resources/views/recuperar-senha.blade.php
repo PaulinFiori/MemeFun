@@ -46,7 +46,7 @@
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
-                    <form method="POST" action="" class="login100-form validate-form">
+                    <form method="POST" action="{{ route('password.email') }}" class="login100-form validate-form">
                         <span class="login100-form-title p-b-26">
                             Recuperar Senha
                         </span>
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="text-center p-t-115">
-                            <a class="txt2" href="{{ route('cadastro') }}">
+                            <a class="txt2" href="{{ route('login') }}">
                                 Voltar ao login
                             </a>
                         </div>
