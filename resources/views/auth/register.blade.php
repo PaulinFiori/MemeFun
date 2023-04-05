@@ -100,7 +100,7 @@
 
                         <span class="file-span">Foto</span>
                         <div class="wrap-input100">
-                            <input class="input100" type="file" name="Foto" value="{{ old('Foto') }}">
+                            <input class="input100" type="file" name="Foto" value="{{ old('Foto') }}" accept="image/*">
                         </div>
 
                         @if ($errors->has('Foto'))
@@ -113,7 +113,7 @@
 
                         <span class="file-span">Banner</span>
                         <div class="wrap-input100">
-                            <input class="input100" type="file" name="Banner" value="c:/{{ old('Banner') }}">
+                            <input class="input100" type="file" name="Banner" value="c:/{{ old('Banner') }}" accept="image/*">
                         </div>
 
                         @if ($errors->has('Banner'))

@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 interface PostsServiceInterface
 {
+    function buscarMeme($id);
+    
     function salvarMeme($request);
 }

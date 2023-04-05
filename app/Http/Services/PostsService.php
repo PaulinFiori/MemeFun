@@ -7,6 +7,10 @@ use App\Models\Meme;
 
 class PostsService implements PostsServiceInterface
 {
+    public function buscarMeme($id) {
+        return Meme::find($id);
+    }
+
     public function salvarMeme($request) {
         if($request->_token) {
             $meme = new Meme();
@@ -25,6 +29,7 @@ class PostsService implements PostsServiceInterface
             $linkDaFoto = 'storage/' . $imagemUrn;
 
             $meme->anexo = $linkDaFoto;
+            $meme->extensao = $request->file('arquivo')->getClientOriginalExtension();
 
             $meme->user_id = auth()->user()->id;
 
