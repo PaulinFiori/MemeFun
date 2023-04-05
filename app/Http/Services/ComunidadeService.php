@@ -28,6 +28,7 @@ class ComunidadeService implements ComunidadeServiceInterface
                 $imagemUrn = $file->store('imagens', 'public');
 
                 $linkDaFoto = 'storage/' . $imagemUrn;
+                $post->extensao = $request->file('arquivo')->getClientOriginalExtension();
 
                 $post->anexo = $linkDaFoto;
             }

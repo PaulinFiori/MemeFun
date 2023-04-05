@@ -25,6 +25,8 @@ class PostsController extends Controller
     }
 
     public function memeEspecifico($id) {
-        return view("meme-especifico");
+        $meme = $this->postsService->buscarMeme(base64_decode($id));
+
+        return view("meme-especifico", ["meme" => $meme]);
     }
 }

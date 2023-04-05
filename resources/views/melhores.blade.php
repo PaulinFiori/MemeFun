@@ -28,12 +28,14 @@
                                 </div>
                                 <div class="media m-0">
                                     <div class="d-flex mr-3 cursor-pointer">
-                                        <a href="">
-                                            <img class="img-fluid rounded-circle" src="{{ $meme->usuario->foto }}" alt="User">
-                                        </a>
+                                        @if($meme->usuario->foto != null)
+                                            <img class="img-fluid rounded-circle" src="{{ config('app.url') . '/' . $meme->usuario->foto }}" alt="User" onclick="window.location.href = '{{ config('app.url') . '/perfil/' . base64_encode($meme->usuario->id) }}'">
+                                        @else
+                                            <img class="img-fluid rounded-circle" src="{{ asset('images/default-user.jpg') }}" alt="User" onclick="window.location.href = '{{ config('app.url') . '/perfil/' . base64_encode($meme->usuario->id) }}'">
+                                        @endif
                                     </div>
                                     <div class="media-body">
-                                        <p class="m-0 cursor-pointer">{{ $meme->usuario->name }}</p>
+                                        <p class="m-0 cursor-pointer" onclick="window.location.href = '{{ config('app.url') . '/perfil/' . base64_encode($meme->usuario->id) }}'">{{ $meme->usuario->name }}</p>
                                         <small>
                                             <span>
                                                 <i class="icon ion-md-time"></i>
@@ -49,9 +51,17 @@
                                     <p>{{ $meme->titulo }}<p>
                                 </div>
 
-                                <div class="cardbox-item">
-                                    <img class="img-fluid" src="{{ $meme->anexo }}" alt="Image">
-                                </div>
+                                @if($meme->extensao == 'jpeg' || $meme->extensao == 'webp' || $meme->extensao == 'png' || $meme->extensao == 'jpg')
+                                    <div class="cardbox-item">
+                                        <img class="img-fluid" src="{{ $meme->anexo }}" alt="Image">
+                                    </div>
+                                @else
+                                    <div class="cardbox-item">
+                                        <video width="100%" height="500px" controls>
+                                            <source src="{{ config('app.url') . '/' . $meme->anexo }}">
+                                        </video>
+                                    </div>
+                                @endif
 
                                 <div class="cardbox-item">
                                     <p>{{ $meme->descricao }}<p>
@@ -83,7 +93,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="cursor-pointer">
+                                            <a class="cursor-pointer clipb" data-clipboard-text="{{ config('app.url')}}/meme/{{ base64_encode($meme->id) }}">
                                                 <i class="fa fa-share-alt"></i>
                                             </a>
                                         </li>
@@ -153,4 +163,12 @@
             <p class="font-weight-bold text-center mb-3 mt-3">Não há memes aqui.</p>
         @endif
     </div>
+
+    <script>
+        var clipboard = new ClipboardJS(".clipb");
+        clipboard.on("success", function(e) {
+            toastr.info('Agora é so compartilhar.', 'Copiado com sucesso!');
+            e.clearSelection();
+        });
+    </script>
 @endsection

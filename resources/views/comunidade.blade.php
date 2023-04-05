@@ -62,9 +62,17 @@
                         </div>
 
                         @if($post->anexo != null)
-                            <div class="cardbox-item">
-                                <img class="img-fluid" src="{{ $post->anexo }}" alt="Image">
-                            </div>
+                            @if($post->extensao == 'jpeg' || $post->extensao == 'Webp' || $post->extensao == 'png' || $post->extensao == 'jpg')
+                                <div class="cardbox-item">
+                                    <img class="img-fluid" src="{{ $post->anexo }}" alt="Image">
+                                </div>
+                            @else
+                                <div class="cardbox-item">
+                                    <video width="100%" height="500px" controls>
+                                        <source src="{{ config('app.url') . '/' . $post->anexo }}">
+                                    </video>
+                                </div>
+                            @endif
                         @endif
 
                         <div class="cardbox-item">

@@ -5,7 +5,7 @@
 
     <div class="row mb-5 d-block d-sm-flex gap-3 mx-1">
         @foreach ($usuario->seguidores as $seguidor)
-            <div class="mb-3 card-seguidores col-12 col-sm-4 col-md-3 col-lg-2 shadow-lg" onclick="window.location.href = '{{ route('perfil', [$seguidor->seguidor->id]) }}'">
+            <div class="mb-3 card-seguidores col-12 col-sm-4 col-md-3 col-lg-2 shadow-lg" onclick="window.location.href = '{{ route('perfil', [base64_encode($seguidor->seguidor->id)]) }}'">
                 @if($seguidor->seguidor->foto != null)
                     <img src="{{ config('app.url') . '/' . $seguidor->seguidor->foto }}" class="rounded-circle img-seguidres">
                 @else

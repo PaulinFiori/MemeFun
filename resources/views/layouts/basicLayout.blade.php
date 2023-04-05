@@ -25,6 +25,8 @@
         <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
         
         <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+
+        <script src="{{ asset('js/clipboard.js') }}"></script>
         
     </head>
 
