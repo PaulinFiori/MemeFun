@@ -20,10 +20,10 @@
                                     <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
                                         @auth
                                             @if(auth()->user()->tipo == "A" || $meme->user_id == auth()->user()->id)
-                                                <a class="dropdown-item" href="#">Excluir</a>
+                                                <a class="dropdown-item" onclick="excluirMeme({{ $meme->id }})">Excluir</a>
                                             @endif
                                         @endauth
-                                        <a class="dropdown-item" href="#">Reportar</a>
+                                        <a class="dropdown-item" onclick="reportarMeme({{ $meme->id }}, '{{ base64_encode($meme->id) }}')">Reportar</a>
                                     </div>
                                 </div>
                                 <div class="media m-0">
@@ -98,14 +98,14 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="cursor-pointer">
+                                            <a class="cursor-pointer" href="{{ config('app.url')}}/baixarMeme/{{ base64_encode($meme->id) }}">
                                                 <i class="fa-solid fa-circle-down no-margin-right"></i>
                                             </a>
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
-                                            <a class="cursor-pointer">
+                                            <a class="cursor-pointer" onclick="curtiMeme('{{base64_encode($meme->id)}}')">
                                                 <i class="fa fa-thumbs-up {{$curtiuMeme ? 'text-primary' : '' }}"></i>
                                                 <span class="ml-menus-5-percent">{{ count($meme->curtidas) }} Curtida(s)</span>
                                             </a>
@@ -119,17 +119,78 @@
                                     <!--start comments -->
                                     @if(count($meme->comentarios) > 0)
                                         @foreach ($meme->comentarios as $comentario)
-                                            <div class="d-flex mb-3">
-                                                <span class="comment-avatar float-left">
-                                                    <a>
-                                                        <img class="rounded-circle" src="{{ $comentario->usuario->foto }}" alt="...">
-                                                    </a>                            
-                                                </span>
-                                                <div class="comment me-3 float-right mt-10">
-                                                    <span>
-                                                        {{ $comentario->usuario->descricao }}
-                                                    </span>
-                                                </div>
+                                            <div class="mb-3">
+                                                @if($comentario->id_comentario_meme == null)
+                                                    <div class="d-flex">
+                                                        <span class="comment-avatar float-left">
+                                                            <a>
+                                                                <img class="rounded-circle" src="{{ $comentario->usuario->foto }}" alt="...">
+                                                            </a>                            
+                                                        </span>
+                                                        <div class="comment me-3 float-right mt-10">
+                                                            <div class="name-comment">
+                                                                {{ $comentario->usuario->name }}
+                                                            </div>
+                                                            <span>
+                                                                {{ $comentario->descricao }}
+                                                            </span>
+                                                            <div>
+                                                                <span class="reply-comment" onclick="showResponderComentario({{$comentario->id}}, {{$meme->id}}, '{{$comentario->descricao}}')">Responder</span>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <button class="btn btn-flat btn-flat-icon btn-comment" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <em class="fa fa-ellipsis-vertical"></em>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                                @auth
+                                                                    @if(auth()->user()->tipo == "A" || $comentario->usuario->id == auth()->user()->id)
+                                                                        <a class="dropdown-item" onclick="excluirComentarioMeme({{$comentario->id}})">Excluir</a>
+                                                                    @endif
+                                                                @endauth
+                                                                <a class="dropdown-item" onclick="reportarComentarioMeme({{$comentario->id}}, '{{ base64_encode($comentario->meme->id)}}')">Reportar</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                <!--start reply comments -->
+                                                @if(count($comentario->comentarios) > 0 )
+                                                    @foreach ($comentario->comentarios as $comentarioFilho)
+                                                        <div class="d-flex mb-3 ml-4">
+                                                            <span class="comment-avatar float-left">
+                                                                <a>
+                                                                    <img class="rounded-circle" src="{{ $comentarioFilho->usuario->foto }}" alt="...">
+                                                                </a>                            
+                                                            </span>
+                                                            <div class="comment me-3 float-right mt-10">
+                                                                <div class="name-comment">
+                                                                    {{ $comentario->usuario->name }}
+                                                                </div>
+                                                                <span>
+                                                                    {{ $comentarioFilho->descricao }}
+                                                                </span>
+                                                                <div>
+                                                                    <span class="reply-comment" onclick="showResponderComentario({{$comentarioFilho->id}}, {{$meme->id}}, '{{$comentarioFilho->descricao}}')">Responder</span>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-flat btn-flat-icon btn-comment" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <em class="fa fa-ellipsis-vertical"></em>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                                    @auth
+                                                                        @if(auth()->user()->tipo == "A" || $comentarioFilho->usuario->id == auth()->user()->id)
+                                                                            <a class="dropdown-item" onclick="excluirComentarioMeme({{$comentarioFilho->id}})">Excluir</a>
+                                                                        @endif
+                                                                    @endauth
+                                                                    <a class="dropdown-item" onclick="reportarComentarioMeme({{$comentarioFilho->id}}, '{{ base64_encode($comentarioFilho->meme->id) }}')">Reportar</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                <!--/ reply comments -->
                                             </div>
                                         @endforeach
                                     @endif
@@ -146,8 +207,11 @@
                                     </span>
                                     <!--start Search -->
                                     <div class="search">
-                                        <input placeholder="Deixe um comentário" type="text">
-                                        <button>
+                                        <span class="reply-comment-input d-none" id="reply-comment-input-{{$meme->id}}">
+                                        </span>
+                                        <input type="hidden" name="id" id="id" value="{{ $meme->id }}">
+                                        <input placeholder="Deixe um comentário" type="text" name="comentario-{{ $meme->id }}" id="comentario-{{ $meme->id }}">
+                                        <button type="button" id="button-send-comment-{{ $meme->id }}" class="" onclick="comentarMeme({{ $meme->id }})">
                                             <i class="fa-solid fa-paper-plane"></i>
                                         </button>
                                     </div>
@@ -165,10 +229,147 @@
     </div>
 
     <script>
-        var clipboard = new ClipboardJS(".clipb");
-        clipboard.on("success", function(e) {
-            toastr.info('Agora é so compartilhar.', 'Copiado com sucesso!');
-            e.clearSelection();
+        let comentarioResponder = null;
+
+        $(document).ready(function() {
+            var clipboard = new ClipboardJS(".clipb");
+            clipboard.on("success", function(e) {
+                toastr.info('Agora é so compartilhar.', 'Copiado com sucesso!');
+                e.clearSelection();
+            });
         });
+
+        function curtiMeme(id) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('curtiMeme') }}",
+                dataType: "json",
+                data: {
+                    "_token": "{{@csrf_token()}}",
+                    "id": id
+                },
+                success: function() {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function baixarMeme(id) {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('baixarMeme') }}",
+                dataType: "json",
+                data: {
+                    "_token": "{{@csrf_token()}}",
+                    "id": id
+                },
+                success: function() {
+                }
+            });
+        }
+
+        function comentarMeme(id) {
+            let input = "#comentario-" + id;
+            if($(input).val() != '') {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('comentarMeme') }}",
+                    dataType: "json",
+                    data: {
+                        "_token": "{{@csrf_token()}}",
+                        "id": id,
+                        'comentario': $(input).val(),
+                        'id_comentario_meme': comentarioResponder
+                    },
+                    success: function() {
+                        window.location.reload();
+                    }
+                });
+            } else {
+                toastr.error('Para comentar digite algo.', 'Erro!');
+            }
+        }
+
+        function excluirMeme(id) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('excluirMeme') }}",
+                dataType: "json",
+                data: {
+                    "_token": "{{@csrf_token()}}",
+                    "id": id
+                },
+                success: function() {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function reportarMeme(id, memeId) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('reportarMeme') }}",
+                dataType: "json",
+                data: {
+                    "_token": "{{@csrf_token()}}",
+                    "id": id,
+                    "meme_id": memeId
+                },
+                success: function() {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function showResponderComentario(id, memeId, texto) {
+            comentarioResponder = id;
+            let respoderinput = "#reply-comment-input-" + memeId;
+            let responderButton = "#button-send-comment-" + memeId;
+            $(respoderinput).html("Respondendo: " + texto.substring(0, 9) + "..." +
+                "<button class='btn btn-flat btn-flat-icon-close' type='button' aria-expanded='false' onclick='unshowResponderComentario(" + memeId + ")'>" +
+                    "<i class='fa-solid fa-xmark'></i>" +
+                "</button>");
+            $(respoderinput).removeClass("d-none");
+            $(responderButton).addClass("mt-24");
+        }
+
+        function unshowResponderComentario(id) {
+            comentarioResponder = null;
+            let respoderinput = "#reply-comment-input-" + id;
+            let responderButton = "#button-send-comment-" + id;
+            $(respoderinput).addClass("d-none");
+            $(responderButton).removeClass("mt-24");
+        }
+
+        function excluirComentarioMeme(id) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('excluirComentario') }}",
+                dataType: "json",
+                data: {
+                    "_token": "{{@csrf_token()}}",
+                    "id": id
+                },
+                success: function() {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function reportarComentarioMeme(id, memeId) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('reportarComentario') }}",
+                dataType: "json",
+                data: {
+                    "_token": "{{@csrf_token()}}",
+                    "id": id,
+                    "meme_id": memeId
+                },
+                success: function() {
+                    window.location.reload();
+                }
+            });
+        }
     </script>
 @endsection

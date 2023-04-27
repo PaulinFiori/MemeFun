@@ -56,57 +56,6 @@
                 <a class="text-reset me-3" href="{{route('novo-post')}}">
                     <i class="fa-solid fa-plus"></i>
                 </a>
-            
-                <a href="#notifications_menu" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                    data-caret="false">
-                    <i class="fas fa-bell"></i>
-                    @if(1 > 0)
-                        <span class="badge badge-danger" style="right: 0; background: #e55039">1</span>
-                    @endif
-                </a>
-
-                <div id="notifications_menu" class="dropdown-menu dropdown-menu-right navbar-notifications-menu">
-                    <div class="dropdown-item d-flex align-items-center py-2" style="cursor: default;">
-                        <span class="flex notificacao-title m-0">Notificações</span>
-                    </div>
-                    <div class="navbar-notifications-menu__content" data-perfect-scrollbar>
-                        @php
-                            $notificacoes = ["oi"];
-                        @endphp
-
-                        @foreach($notificacoes as $notificacao)
-                            @php
-                                $mensagem = "Teste";
-                                //$mensagem = \App\Models\Mensagens::find($notificacao->fk_id_mensagem);
-                            @endphp
-
-                            @if($mensagem != null)
-                            <div class="py-2 cp" onclick="window.location.href = '{{route('home')}}'">
-                                <div class="dropdown-item d-flex">
-                                    <div class="mr-3">
-                                        <div class="avatar avatar-sm" style="width: 32px; height: 32px;">
-                                            @if(true)
-                                                <img src="images/default-user.jpg" alt="avatar"
-                                                        style="height: 32px; width: 32px" class="avatar-img rounded-circle">
-                                            @else
-                                                <img src="images/default-user.jpg" alt="avatar" style="height: 32px; width: 32px"
-                                                        class="avatar-img rounded-circle">
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="d-block mx-3">
-                                        <strong class="d-block">Paulo</strong>
-                                        "Oi..."
-                                        <a href="">Meme 1</a>
-                                        <br>
-                                        <small class="text-muted">há 1 minuto</small>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
             @endif
 
             <div class="dropdown">

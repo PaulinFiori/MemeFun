@@ -21,7 +21,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'tipo',
         'name',
+        'nome_marcacao',
         'email',
         'password',
         'foto',
@@ -83,13 +85,11 @@ class User extends Authenticatable
         return $this->hasMany(UserTag::class);
     }
 
-    public function sendPasswordResetNotification($token)
-    {
+    public function sendPasswordResetNotification($token) {
         $this->notify(new PasswordReset($token, $this->name));
     }
 
-    public function sendBemVindoNotification()
-    {
+    public function sendBemVindoNotification() {
         $this->notify(new BemVindo($this->name));
     }
 }
