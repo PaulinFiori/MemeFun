@@ -32,6 +32,11 @@
                 <span class="focus-input100" data-placeholder="Nome"></span>
             </div>
 
+            <div class="wrap-input100 validate-input" data-validate="Digite um nome de usuário">
+                <input class="input100" type="text" name="nome_marcacao" value="{{ auth()->user()->nome_marcacao }}">
+                <span class="focus-input100" data-placeholder="Nome de usuário"></span>
+            </div>
+
             <div class="wrap-input100 validate-input" data-validate = "Email válido é: a@b.c">
                 <input class="input100" type="text" name="email" value="{{ auth()->user()->email }}">
                 <span class="focus-input100" data-placeholder="Email"></span>

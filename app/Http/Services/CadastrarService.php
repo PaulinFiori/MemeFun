@@ -17,14 +17,16 @@ class CadastrarService implements CadastrarServiceInterface
             $regras = [
                 "Nome" => "required|min:1|max:45",
                 "Senha" => "required|min:6",
-                "Email" => "email"
+                "Email" => "email",
+                "Nome_Marcacao" => "required|unique:users,nome_marcacao"
             ];
 
             $feedback = [
                 "required" => "O campo :attribute é requirido",
                 "Nome.min" => "O campo nome tem que ter no mínimo 1 letra",
                 "Nome.max" => "O campo nome tem que ter no máximo 45 letras",
-                "Senha.min" => "O campo senha tem que ter no mínimo 6 letras"
+                "Senha.min" => "O campo senha tem que ter no mínimo 6 letras",
+                "Nome_Marcacao.unique" => "O campo nome de usuário tem que ser único"
             ];
 
             $request->validate($regras, $feedback);
@@ -32,6 +34,7 @@ class CadastrarService implements CadastrarServiceInterface
             $usuario = new User();
             $usuario->tipo = "U";
             $usuario->name = $request->Nome;
+            $usuario->nome_marcacao = $request->Nome_Marcacao;
             $usuario->password = Hash::make($request->Senha);
             $usuario->email = $request->Email;
 
