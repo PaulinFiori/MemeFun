@@ -69,6 +69,19 @@
                             </div>
                         @endif
 
+                        <div class="wrap-input100 validate-input" data-validate="Digite um nome de usuário">
+                            <input class="input100" type="text" name="Nome_Marcacao" value="{{ old('Nome_Marcacao') }}">
+                            <span class="focus-input100" data-placeholder="Nome de usuário"></span>
+                        </div>
+
+                        @if ($errors->has('Nome'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {{ $errors->first('Nome_Marcacao') }}
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="wrap-input100 validate-input" data-validate="Digite uma senha">
                             <span class="btn-show-pass">
                                 <iconify-icon icon="zmdi:eye"></iconify-icon>
@@ -100,7 +113,7 @@
 
                         <span class="file-span">Foto</span>
                         <div class="wrap-input100">
-                            <input class="input100" type="file" name="Foto" value="{{ old('Foto') }}">
+                            <input class="input100" type="file" name="Foto" value="{{ old('Foto') }}" accept="image/*">
                         </div>
 
                         @if ($errors->has('Foto'))
@@ -113,7 +126,7 @@
 
                         <span class="file-span">Banner</span>
                         <div class="wrap-input100">
-                            <input class="input100" type="file" name="Banner" value="c:/{{ old('Banner') }}">
+                            <input class="input100" type="file" name="Banner" value="c:/{{ old('Banner') }}" accept="image/*">
                         </div>
 
                         @if ($errors->has('Banner'))

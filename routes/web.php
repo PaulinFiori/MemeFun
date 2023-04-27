@@ -48,6 +48,14 @@ Route::controller(PostsController::class)->group(function() {
     Route::post('/novo-post', 'salvarNovoPost')->name("novo-post");
 
     Route::get('/meme/{id}', 'memeEspecifico')->name("meme-especifico");
+
+    Route::post('/curtiMeme', 'curtiMeme')->name("curtiMeme");
+    Route::get('/baixarMeme/{id?}', 'baixarMeme')->name("baixarMeme");
+    Route::post('/comentarMeme', 'comentarMeme')->name("comentarMeme");
+    Route::post('/excluirMeme', 'excluirMeme')->name("excluirMeme");
+    Route::post('/reportarMeme', 'reportarMeme')->name("reportarMeme");
+    Route::post('/excluirComentario', 'excluirComentario')->name("excluirComentario");
+    Route::post('/reportarComentario', 'reportarComentario')->name("reportarComentario");
 });
 
 Route::controller(NotificacaoController::class)->group(function() {

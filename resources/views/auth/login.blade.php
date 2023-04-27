@@ -104,7 +104,7 @@
                                     Esqueçeu a senha?
                                 </span>
 
-                                <a class="txt2" href="{{ route('recuperar-senha') }}" href="{{ route('password.request') }}">
+                                <a class="txt2" href="{{ route('password.request') }}">
                                     Recuperar senha
                                 </a>
                             </div>

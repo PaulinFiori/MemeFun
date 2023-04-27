@@ -24,8 +24,16 @@ body {
     margin-right: 2rem!important;
 }
 
+.ml-4 {
+    margin-left: 1.5rem!important;
+}
+
 .mt-10 {
     margin-top: 10px;
+}
+
+.mt-24 {
+    margin-top: 24px;
 }
 
 .no-margin-right {

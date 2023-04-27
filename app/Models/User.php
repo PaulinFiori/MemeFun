@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use App\Notifications\PasswordReset;
+use App\Notifications\BemVindo;
 
 class User extends Authenticatable
 {
@@ -19,7 +21,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'tipo',
         'name',
+        'nome_marcacao',
         'email',
         'password',
         'foto',
@@ -79,5 +83,13 @@ class User extends Authenticatable
 
     public function usuariosTags() {
         return $this->hasMany(UserTag::class);
+    }
+
+    public function sendPasswordResetNotification($token) {
+        $this->notify(new PasswordReset($token, $this->name));
+    }
+
+    public function sendBemVindoNotification() {
+        $this->notify(new BemVindo($this->name));
     }
 }

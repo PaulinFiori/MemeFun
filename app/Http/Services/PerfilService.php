@@ -29,6 +29,11 @@ class PerfilService implements PerfilServiceInterface
             $usuario = auth()->user();
             $usuario->tipo = auth()->user()->tipo;
             $usuario->name = $request->nome;
+
+            $jaExisteNomeMarcacao = User::where("nome_marcacao", $request->nome_marcacao)->first();
+
+            if($jaExisteNomeMarcacao == null) $usuario->nome_marcacao = $request->nome_marcacao;
+
             if($request->senha != null ) $usuario->password = Hash::make($request->senha);
             $usuario->email = $request->email;
 

@@ -123,10 +123,10 @@ iframe {
     transition: all 0.4s;
 
     background: #6a7dfe;
-    background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-    background: -o-linear-gradient(left, #21d4fd, #b721ff);
-    background: -moz-linear-gradient(left, #21d4fd, #b721ff);
-    background: linear-gradient(left, #21d4fd, #b721ff);
+    background: -webkit-linear-gradient(left, #FFFF00, #8B8000);
+    background: -o-linear-gradient(left, #FFFF00, #8B8000);
+    background: -moz-linear-gradient(left, #FFFF00, #8B8000);
+    background: linear-gradient(left, #FFFF00, #8B8000);
 }
 
 .focus-input100::after {
@@ -188,18 +188,18 @@ iframe {
 
 .btn-show-pass:hover {
     color: #6a7dfe;
-    color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-    color: -o-linear-gradient(left, #21d4fd, #b721ff);
-    color: -moz-linear-gradient(left, #21d4fd, #b721ff);
-    color: linear-gradient(left, #21d4fd, #b721ff);
+    color: -webkit-linear-gradient(left, #FFFF00, #8B8000);
+    color: -o-linear-gradient(left, #FFFF00, #8B8000);
+    color: -moz-linear-gradient(left, #FFFF00, #8B8000);
+    color: linear-gradient(left, #FFFF00, #8B8000);
 }
 
 .btn-show-pass.active {
     color: #6a7dfe;
-    color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-    color: -o-linear-gradient(left, #21d4fd, #b721ff);
-    color: -moz-linear-gradient(left, #21d4fd, #b721ff);
-    color: linear-gradient(left, #21d4fd, #b721ff);
+    color: -webkit-linear-gradient(left, #FFFF00, #8B8000);
+    color: -o-linear-gradient(left, #FFFF00, #8B8000);
+    color: -moz-linear-gradient(left, #FFFF00, #8B8000);
+    color: linear-gradient(left, #FFFF00, #8B8000);
 }
 
 /*------------------------------------------------------------------*/

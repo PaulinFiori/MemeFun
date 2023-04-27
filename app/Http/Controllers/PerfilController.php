@@ -17,8 +17,8 @@ class PerfilController extends Controller
 
     public function perfil() {
         $id = explode('perfil/', url()->current())[1];
-        $memes = $this->perfilService->buscarMemes($id);
-        $usuario = $this->perfilService->buscarUsuario($id);
+        $memes = $this->perfilService->buscarMemes(base64_decode($id));
+        $usuario = $this->perfilService->buscarUsuario(base64_decode($id));
 
         return view("perfil", [
             "memes" => $memes,
