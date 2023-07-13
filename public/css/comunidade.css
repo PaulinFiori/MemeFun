@@ -251,10 +251,27 @@
 ---------------------------------- */
 
 .cardbox-comments {
-    padding: 10px 40px 20px 86px !important;
     font-size: 0px;	
     text-align: center;
-    display: inline-block;
+    font-size: 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardbox-comments1 {
+    font-size: 0px;	
+    text-align: center;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 10px;
 }
 
 .cardbox-comments .comment-avatar img {
@@ -278,6 +295,7 @@
     width: max-content;
     overflow: hidden;
     border-radius: 0.25rem;
+    height: max-content;
 }
 
 .search input[type="text"] {
@@ -327,6 +345,11 @@
     text-align: left;
 }
    
+.name-comment {
+    font-size: 14px;
+    color: black !important;
+    font-weight: bold;
+}
    
 /* ------------------------------- */
 /* Author

@@ -32,6 +32,14 @@ body {
     margin-top: 10px;
 }
 
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
+.ml-50 {
+    margin-left: 50px !important;
+}
+
 .mt-24 {
     margin-top: 24px;
 }

@@ -12,9 +12,9 @@
 
             <h1 class="mb-5">Novo Post</h1>
 
-            <div class="wrap-input100 validate-input" data-validate="Digite um título">
+            <div class="wrap-input100">
                 <input class="input100" type="text" name="titulo">
-                <span class="focus-input100" data-placeholder="Titulo"></span>
+                <span class="focus-input100" data-placeholder="Titulo (opicional)"></span>
             </div>
 
             <div class="wrap-input100">

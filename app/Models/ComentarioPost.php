@@ -12,7 +12,7 @@ class ComentarioPost extends Model
     use SoftDeletes;
     
     protected $table = 'comentario_post';
-    protected $fillable = ['user_id', 'post_id' , 'descricao', 'comentario_post'];
+    protected $fillable = ['user_id', 'post_id' , 'descricao', 'id_comentario_post'];
 
     public function usuario() {
         return $this->belongsTo(User::class, "user_id", "id");
@@ -20,5 +20,9 @@ class ComentarioPost extends Model
 
     public function post() {
         return $this->belongsTo(Post::class, "post_id", "id");
+    }
+
+    public function comentarios() {
+        return $this->hasMany(ComentarioPost::class, "id_comentario_post", "id");
     }
 }
