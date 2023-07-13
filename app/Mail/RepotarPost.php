@@ -13,12 +13,16 @@ class RepotarPost extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $post;
+    public $url;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($post, $url)
     {
-        //
+        $this->post = $post;
+        $this->url = $url;
     }
 
     /**
@@ -37,7 +41,12 @@ class RepotarPost extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'emails.reportar-post',
+            with: [
+                'post' => $this->post,
+                'url' => $this->url,
+
+            ],
         );
     }
 

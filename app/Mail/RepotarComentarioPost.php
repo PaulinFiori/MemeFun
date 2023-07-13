@@ -13,12 +13,20 @@ class RepotarComentarioPost extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $comentario;
+    public $post;
+    public $postId;
+    public $url;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($comentario, $post, $postId, $url)
     {
-        //
+        $this->comentario = $comentario;
+        $this->post = $post;
+        $this->postId = $postId;
+        $this->url = $url;
     }
 
     /**
@@ -37,7 +45,14 @@ class RepotarComentarioPost extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'emails.reportar-comentario-post',
+            with: [
+                'comentario' => $this->comentario,
+                'post' => $this->post,
+                'postId' => $this->postId,
+                'url' => $this->url,
+
+            ],
         );
     }
 

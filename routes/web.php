@@ -41,6 +41,17 @@ Route::controller(ComunidadeController::class)->group(function() {
 
     Route::get('/novo-post-comunidade', 'novoPostComunidade')->name("novo-post-comunidade");
     Route::post('/novo-post-comunidade', 'salvarNovoPostComunidade')->name("novo-post-comunidade");
+
+    Route::get('/post/{id}', 'postEspecifico')->name("post-comunidade-especifico");
+
+    Route::post('/curti-post-comunidade', 'curtiPostComunidade')->name("curti-post-comunidade");
+    Route::post('/comentar-post-comunidade', 'comentarPostComunidade')->name("comentar-post-comunidade");
+    Route::post('/reportar-post-comunidade', 'reportarPostComunidade')->name("reportar-post-comunidade");
+    Route::post('/excluir-post-comunidade', 'excluirPostComunidade')->name("excluir-post-comunidade");
+    Route::post('/excluir-comentario-comunidade', 'excluirComentarioComunidade')->name("excluir-comentario-comunidade");
+    Route::post('/reportar-comentario-comunidade', 'reportarComentarioComunidade')->name("reportar-comentario-comunidade");
+
+    //post-especifico
 });
 
 Route::controller(PostsController::class)->group(function() {
