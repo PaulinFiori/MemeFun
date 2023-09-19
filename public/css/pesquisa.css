@@ -1,0 +1,19 @@
+p {
+    margin-bottom: 0px !important;
+}
+
+.pesquisa {
+    height: 72vh;
+    background-color: #ededed;
+    max-width: 95vw;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.heigth-120 {
+    height: 120px;
+}

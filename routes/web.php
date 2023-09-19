@@ -12,6 +12,7 @@ use App\Http\Controllers\SeguidoresController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CadastrarController;
 use App\Http\Controllers\RecuperarSenhaController;
+use App\Http\Controllers\PesquisaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,8 +51,6 @@ Route::controller(ComunidadeController::class)->group(function() {
     Route::post('/excluir-post-comunidade', 'excluirPostComunidade')->name("excluir-post-comunidade");
     Route::post('/excluir-comentario-comunidade', 'excluirComentarioComunidade')->name("excluir-comentario-comunidade");
     Route::post('/reportar-comentario-comunidade', 'reportarComentarioComunidade')->name("reportar-comentario-comunidade");
-
-    //post-especifico
 });
 
 Route::controller(PostsController::class)->group(function() {
@@ -101,6 +100,10 @@ Route::controller(RecuperarSenhaController::class)->group(function() {
 
     Route::get('/recuperar-senha/nova-senha', 'novaSenha')->name("nova-senha");
     Route::post('/recuperar-senha/nova-senha', 'salvarSenha')->name("nova-senha");
+});
+
+Route::controller(PesquisaController::class)->group(function() {
+    Route::get('/pesquisa/{busca?}', 'pesquisa')->name("pesquisa");
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

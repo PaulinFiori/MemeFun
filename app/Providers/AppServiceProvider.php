@@ -26,6 +26,9 @@ use App\Http\Services\CadastrarService;
 use App\Http\Services\CadastrarServiceInterface;
 use App\Http\Services\RecuperarSenhaService;
 use App\Http\Services\RecuperarSenhaServiceInterface;
+use App\Http\Services\PesquisaServiceInterface;
+use App\Http\Services\PesquisaService;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LoginServiceInterface::class, LoginService::class);
         $this->app->bind(CadastrarServiceInterface::class, CadastrarService::class);
         $this->app->bind(RecuperarSenhaServiceInterface::class, RecuperarSenhaService::class);
+        $this->app->bind(PesquisaServiceInterface::class, PesquisaService::class);
     }
 
     /**
@@ -56,6 +60,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }
