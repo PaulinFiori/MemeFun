@@ -11,15 +11,19 @@
             @csrf
 
             <div class="mb-3">
+                <label>Modo Escuro</label>
                 <label class="switch">
                     <input type="checkbox">
                     <span class="slider round"></span>
                 </label>
-                <label>Modo Escuro</label>
             </div>
 
             <div class="mb-3">
                 <p>Cor do texto no perfil</p>
+            </div>
+
+            <div class="mb-3">
+                <p>Cor da borda do texto no perfil</p>
             </div>
         </form>
     </div>

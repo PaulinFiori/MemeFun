@@ -47,8 +47,10 @@
         <div class="d-flex align-items-center">
             <div class="container-fluid d-none d-md-flex">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Procurar memes ou usuários" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Procurar memes, usuários ou posts" id="busca" aria-label="Search">
+                    <button class="btn btn-outline-success" type="button" onclick="pesquisa()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </form>
             </div>
             
@@ -113,5 +115,11 @@
 <script>
     toastr.options = {
         "progressBar": true
+    }
+
+    function pesquisa() {
+        let busca = $("#busca").val();
+
+        window.location.href = "{{ route('pesquisa') }}/" + busca;
     }
 </script>
