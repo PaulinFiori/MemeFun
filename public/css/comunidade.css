@@ -2,10 +2,11 @@
 /* Filter
 ---------------------------------- */
 .filter {
-    width: 100px;
     height: 50px;
     position: relative;
     left: 90% !important;  
+    width: max-content;
+    padding: 3px;
 }
 
 /* ------------------------------- */
@@ -23,8 +24,7 @@
     width: 32px;
     padding: 0;
     overflow: hidden;
-    color: #fff !important;
-    background: #b5b6b6;
+    color: black !important;
 
     display: flex;
     flex-direction: column;

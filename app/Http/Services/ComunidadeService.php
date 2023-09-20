@@ -9,6 +9,7 @@ use App\Models\ComentarioPost;
 use App\Mail\RepotarComentarioPost;
 use App\Mail\RepotarPost;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ComunidadeService implements ComunidadeServiceInterface
 {
@@ -17,7 +18,30 @@ class ComunidadeService implements ComunidadeServiceInterface
     }
 
     public function buscarPostComunidade() {
-        return Post::orderBy("id", "desc")->get();
+        $post;
+        
+        if(!isset($_GET['filtro']) || $_GET['filtro'] == "ultimas") {
+            $post = Post::orderBy("id", "desc")->get();
+        } else if(isset($_GET['filtro']) && $_GET['filtro'] == "top") {
+            $periodo = 7; // número de dias
+            $hoje = date('Y-m-d'); // data atual
+            $limite = date('Y-m-d', strtotime("-$periodo days")); // data limite
+
+            $post = Post::join('curtida_post', 'post.id', '=', 'curtida_post.post_id')
+                ->select('post.*')
+                ->whereBetween('post.created_at', [$limite, $hoje])
+                ->groupBy('post.id')
+                ->orderBy(DB::raw('COUNT(curtida_post.post_id)'), 'desc')
+                ->get();
+        } else if(isset($_GET['filtro']) && $_GET['filtro'] == "seguindo") {
+            $post = Post::select("post.*")
+                ->join('seguindo', 'post.user_id', '=', 'seguindo.user_seguindo')
+                ->where('seguindo.user_id', auth()->user()->id)
+                ->orderBy("id", "desc")
+                ->get();
+        }
+
+        return $post;
     }
 
     public function buscarComentario($id) {
