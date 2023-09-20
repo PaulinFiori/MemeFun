@@ -32,43 +32,57 @@ class ComunidadeController extends Controller
 
 
     public function salvarNovoPostComunidade(Request $request) {
-        $this->comunidadeService->salvarPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->salvarPostComunidade($request);
+        }
 
         return redirect()->route("comunidades");
     }
 
     public function curtiPostComunidade(Request $request) {
-        $this->comunidadeService->curtiPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->curtiPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function comentarPostComunidade(Request $request) {
-        $this->comunidadeService->comentarPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->comentarPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function reportarPostComunidade(Request $request) {
-        $this->comunidadeService->reportarPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->reportarPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function excluirPostComunidade(Request $request) {
-        $this->comunidadeService->excluirPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->excluirPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function reportarComentarioComunidade(Request $request) {
-        $this->comunidadeService->reportarComentarioComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->reportarComentarioComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function excluirComentarioComunidade(Request $request) {
-        $this->comunidadeService->excluirComentarioComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->excluirComentarioComunidade($request);
+        }
 
         return response()->json(true);
     }
