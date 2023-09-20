@@ -1,14 +1,18 @@
 @if($usuario->memes)
     <div class="mt-2 mb-5 mx-1">
-        <div class="filter bg-white float-right d-flex align-items-center justify-content-center">
-            <span>Populares</span>
+        <div class="filter shadow-lg bg-white d-flex align-items-center justify-content-center" style="margin-left: 85vw;">
+            @if(!isset($_GET['filtro']) || $_GET['filtro'] == "ultimas")
+                <span>Últimas</span>
+            @elseif(isset($_GET['filtro']) && $_GET['filtro'] == "populares")
+                <span>Populares</span>
+            @endif
             <div class="dropdown">
                 <button class="btn btn-flat btn-flat-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <em class="fa fa-ellipsis-h"></em>
+                    <i class="fa-solid fa-filter"></i>
                 </button>
                 <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item" href="#">Populares</a>
-                    <a class="dropdown-item" href="#">Últimas</a>
+                    <a class="dropdown-item" href="?filtro=populares">Populares</a>
+                    <a class="dropdown-item" href="?filtro=ultimas">Últimas</a>
                 </div>
             </div>
         </div>

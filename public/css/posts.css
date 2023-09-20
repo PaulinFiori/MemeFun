@@ -17,8 +17,7 @@ a {
     width: 32px;
     padding: 0;
     overflow: hidden;
-    color: #fff !important;
-    background: #b5b6b6;
+    color: black !important;
 
     display: flex;
     flex-direction: column;
