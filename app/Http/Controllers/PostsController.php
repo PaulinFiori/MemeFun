@@ -33,7 +33,9 @@ class PostsController extends Controller
     }
 
     public function curtiMeme(Request $request) {
-        $this->postsService->curtiMeme(base64_decode($request->id));
+        if($request->_token) {
+            $this->postsService->curtiMeme(base64_decode($request->id));
+        }
 
         return response()->json(true);
     }
@@ -53,31 +55,41 @@ class PostsController extends Controller
     }
 
     public function comentarMeme(Request $request) {
-        $meme = $this->postsService->comentarMeme($request);
+        if($request->_token) {
+            $meme = $this->postsService->comentarMeme($request);
+        }
 
         return response()->json(true);
     }
 
     public function excluirMeme(Request $request) {
-        $this->postsService->excluirMeme($request);
+        if($request->_token) {
+            $this->postsService->excluirMeme($request);
+        }
 
         return response()->json(true);
     }
 
     public function reportarMeme(Request $request) {
-        $this->postsService->reportarMeme($request);
+        if($request->_token) {
+            $this->postsService->reportarMeme($request);
+        }
 
         return response()->json(true);
     }
 
     public function excluirComentario(Request $request) {
-        $this->postsService->excluirComentario($request);
+        if($request->_token) {
+            $this->postsService->excluirComentario($request);
+        }
 
         return response()->json(true);
     }
 
     public function reportarComentario(Request $request) {
-        $this->postsService->reportarComentario($request);
+        if($request->_token) {
+            $this->postsService->reportarComentario($request);
+        }
 
         return response()->json(true);
 
