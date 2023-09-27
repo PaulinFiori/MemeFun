@@ -5,6 +5,26 @@
 @section('conteudo')
     <link rel="stylesheet" href="{{ asset('css/posts.css') }}"/>
 
+    <div class="navbar-top d-flex d-lg-none justify-content-center align-items-center">
+        <div class="dropdown">
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Melhores
+                </a>
+
+                <div class="dropdown-menu dropwdown-meme">
+                    <a class="dropdown-item" href="{{route('home')}}">
+                        Início
+                    </a>
+                    <a class="dropdown-item" href="{{route('melhores')}}">
+                        Melhores
+                    </a>
+                    <a class="dropdown-item" href="{{route('seguidores')}}">
+                        Seguindo
+                    </a>
+                </div>
+            </div>
+    </div>
+
     <div class="container mt-3">
         @if(count($memes) > 0)
             @foreach ($memes as $meme)

@@ -17,3 +17,8 @@ p {
 .heigth-120 {
     height: 120px;
 }
+
+.img-pesquisa {
+    max-height: 120px; 
+    width: 100%;
+}
