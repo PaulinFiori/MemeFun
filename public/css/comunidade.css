@@ -118,11 +118,6 @@
     align-items: flex-start;
 }
 
-.d-flex {
-    display: -ms-flexbox !important;
-    display: flex !important;
-}
-
 .media .mr-3 {
     margin-right: 1rem !important;
 }
@@ -386,4 +381,37 @@
 
 .new-post i {
     margin-top: 26px;
+}
+
+@media screen and (max-width: 991px) {
+    .new-post {
+        bottom: 60px;
+        right: 25px;
+    }
+
+    .filter {
+        left: 93% !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .new-post {
+        bottom: 60px;
+        right: 25px;
+    }
+
+    .filter {
+        left: 93% !important;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .new-post {
+        bottom: 60px;
+        right: 70px;
+    }
+
+    .filter {
+        left: 70% !important;
+    }
 }

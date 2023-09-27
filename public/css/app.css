@@ -60,6 +60,10 @@ body {
     margin-left: -120px !important;
 }
 
+.dropwdown-meme {
+    z-index: 99999 !important;
+}
+
 .notificacao-title {
     font-weight: bolder;
 }
@@ -154,4 +158,82 @@ background-color: #BD362F !important;
 
 .toast-warning {
     background-color: #F89406 !important;
+}
+
+/* Place the navbar at the top of the page, and make it stick */
+.navbar-top {
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+    --bs-bg-opacity: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    border-top: 1px solid lightgray;
+}
+  
+/* Style the links inside the navigation bar */
+.navbar-top a {
+    display: block;
+    color: var(--bs-nav-link-color);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    width: 100%;
+    padding: 14px 16px;
+}
+  
+/* Change the color of links on hover */
+.navbar-top a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.navbar-top a.active {
+    background-color: #cece03;
+    color: white;
+}
+
+.navbar-top a  img {
+    margin-top: -9px;
+}
+
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar-bottom {
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+    --bs-bg-opacity: 1;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999;
+    border-top: 1px solid lightgray;
+}
+  
+/* Style the links inside the navigation bar */
+.navbar-bottom a {
+    float: left;
+    display: block;
+    color: var(--bs-nav-link-color);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    width: 100%;
+    padding: 14px 16px;
+}
+  
+/* Change the color of links on hover */
+.navbar-bottom a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.navbar-bottom a.active {
+    background-color: #cece03;
+    color: white;
+}
+
+.navbar-bottom a  img {
+    margin-top: -9px;
 }
