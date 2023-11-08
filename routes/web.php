@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CadastrarController;
 use App\Http\Controllers\RecuperarSenhaController;
 use App\Http\Controllers\PesquisaController;
+use App\Http\Controllers\ConfiguracoesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,17 +69,17 @@ Route::controller(PostsController::class)->group(function() {
     Route::post('/reportarComentario', 'reportarComentario')->name("reportarComentario");
 });
 
-Route::controller(NotificacaoController::class)->group(function() {
-    Route::get('/notificacao', 'notificacao')->name("notificacao");
-});
-
 Route::controller(PerfilController::class)->group(function() {
     Route::get('/perfil/{id}', 'perfil')->name("perfil");
     Route::get('/editar-perfil', 'editarPerfil')->name("editar-perfil");
     Route::post('/editar-perfil', 'salvarEditarPerfil')->name("editar-perfil");
-    Route::get('/configuracoes', 'configuracoes')->name("configuracoes");
     Route::post('/seguir', 'seguir')->name("seguir");
     Route::post('/deseguir', 'deseguir')->name("deseguir");
+});
+
+Route::controller(ConfiguracoesController::class)->group(function() {
+    Route::get('/configuracoes', 'configuracoes')->name("configuracoes");
+    Route::post('/configuracoes', 'salvarConfiguracoes')->name("salvar-configuracoes");
 });
 
 Route::controller(RankingController::class)->group(function() {

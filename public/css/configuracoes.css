@@ -1,0 +1,41 @@
+.div-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    margin-right: 5px;
+}
+
+.black {
+    background-color: black;
+}
+
+.white {
+    background-color: white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.texto-active {
+    border-color: #daa520;
+    border-width: 2px;
+}
+
+.borda-active {
+    border-color: #daa520;
+    border-width: 2px;
+}
