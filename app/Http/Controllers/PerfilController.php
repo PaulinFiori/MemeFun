@@ -36,10 +36,6 @@ class PerfilController extends Controller
         return redirect()->route("editar-perfil");
     }
 
-    public function configuracoes() {
-        return view("configuracoes");
-    }
-
     public function seguir(Request $request) {
         $this->perfilService->seguir($request->usuario_id);
 
