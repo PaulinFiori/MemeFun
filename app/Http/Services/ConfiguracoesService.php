@@ -35,6 +35,8 @@ class ConfiguracoesService implements ConfiguracoesServiceInterface
             }
 
             $userConfiguracoes->save();
+        } else {
+            return "Ocorreu um erro no servidor.";
         }
     }
 }

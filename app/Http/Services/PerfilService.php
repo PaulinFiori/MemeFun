@@ -38,6 +38,12 @@ class PerfilService implements PerfilServiceInterface
             $usuario->email = $request->email;
 
             if($request->foto != null) {
+                $tamanhoFoto = (filesize($request->file('foto')) / 1024) / 1024;
+
+                if($tamanhoFoto > 5.0) {
+                    return "Imagem enviada é maior do que 5mb.";
+                }
+
                 $file = $request->file('foto');
 
                 //todo: salvar no s3
@@ -51,6 +57,12 @@ class PerfilService implements PerfilServiceInterface
             }
 
             if($request->banner != null) {
+                $tamanhoBanner = (filesize($request->file('banner')) / 1024) / 1024;
+
+                if($tamanhoBanner > 5.0) {
+                    return "Imagem enviada é maior do que 5mb.";
+                }
+
                 $file = $request->file('banner');
 
                 //todo: salvar no s3
@@ -67,8 +79,8 @@ class PerfilService implements PerfilServiceInterface
             }
 
             $usuario->save();
-
-            return true;
+        } else {
+            return "Ocorreu um erro no servidor.";
         }
     }
 

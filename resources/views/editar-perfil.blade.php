@@ -18,12 +18,12 @@
             <br>
 
             <div class="wrap-input100">
-                <input class="input100" type="file" name="foto">
+                <input class="input100" type="file" name="foto" accept="image/*">
                 <span class="focus-input100" data-placeholder="Foto"></span>
             </div>
 
             <div class="wrap-input100">
-                <input class="input100" type="file" name="banner">
+                <input class="input100" type="file" name="banner" accept="image/*">
                 <span class="focus-input100" data-placeholder="Banner"></span>
             </div>
 

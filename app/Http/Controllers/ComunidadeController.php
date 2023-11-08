@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\ComunidadeServiceInterface;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ComunidadeController extends Controller
 {
@@ -32,11 +33,13 @@ class ComunidadeController extends Controller
 
 
     public function salvarNovoPostComunidade(Request $request) {
-        if($request->_token) {
-            $this->comunidadeService->salvarPostComunidade($request);
-        }
+        $resposta = $this->comunidadeService->salvarPostComunidade($request);
 
-        return redirect()->route("comunidades");
+        if($resposta != null) {
+            return redirect()->route("novo-post-comunidade", ["erro" => Alert::error($resposta)]);
+        } else {
+            return redirect()->route("comunidades");
+        }
     }
 
     public function curtiPostComunidade(Request $request) {

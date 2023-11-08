@@ -78,3 +78,23 @@ em {
 .search button i {
     color: #949698 !important;
 }
+
+.nav-link {
+    color: #949698 !important;
+}
+
+.pesquisa-dark p {
+    color: #949698 !important;
+}
+
+.pesquisa-dark a {
+    color: #949698 !important;
+}
+
+.pesquisa-dark i {
+    color: #949698 !important;
+}
+
+.page-link {
+    color: black !important;
+}

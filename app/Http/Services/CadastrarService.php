@@ -39,6 +39,12 @@ class CadastrarService implements CadastrarServiceInterface
             $usuario->email = $request->Email;
 
             if($request->Foto != null) {
+                $tamanhoFoto = (filesize($request->file('Foto')) / 1024) / 1024;
+
+                if($tamanhoFoto > 5.0) {
+                    return "Imagem enviada é maior do que 5mb.";
+                }
+
                 $file = $request->file('Foto');
 
                 //todo: salvar no s3
@@ -52,6 +58,12 @@ class CadastrarService implements CadastrarServiceInterface
             }
 
             if($request->Banner != null) {
+                $tamanhoBanner = (filesize($request->file('Banner')) / 1024) / 1024;
+
+                if($tamanhoBanner > 5.0) {
+                    return "Imagem enviada é maior do que 5mb.";
+                }
+
                 $file = $request->file('Banner');
 
                 //todo: salvar no s3

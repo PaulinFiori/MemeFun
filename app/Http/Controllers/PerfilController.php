@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\PerfilServiceInterface;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PerfilController extends Controller
 {
@@ -31,9 +32,13 @@ class PerfilController extends Controller
     }
 
     public function salvarEditarPerfil(Request $request) {
-        $this->perfilService->editar($request);
+        $resposta = $this->perfilService->editar($request);
 
-        return redirect()->route("editar-perfil");
+        if($resposta != null) {
+            return redirect()->route("editar-perfil", ["erro" => Alert::error($resposta)]);
+        } else {
+            return redirect()->route("editar-perfil");
+        }
     }
 
     public function seguir(Request $request) {

@@ -58,29 +58,37 @@ class ComunidadeService implements ComunidadeServiceInterface
 
     public function salvarPostComunidade($request) {
         if($request->_token != null) {
-            $post = new Post();
+            $tamanhoArquivo = (filesize($request->file('arquivo')) / 1024) / 1024;
 
-            if($request->titulo) $post->titulo = $request->titulo;
+            if($tamanhoArquivo < 5.0) {
+                $post = new Post();
 
-            $post->descricao = $request->descricao;
+                if($request->titulo) $post->titulo = $request->titulo;
 
-            if($request->arquivo != null) {
-                $file = $request->file('arquivo');
+                $post->descricao = $request->descricao;
 
-                //todo: salvar no s3
-                /*$pastaDoArquivoNaS3 = Storage::disk('s3')->put("Fotos/", $file);*/
+                if($request->arquivo != null) {
+                    $file = $request->file('arquivo');
 
-                $imagemUrn = $file->store('imagens', 'public');
+                    //todo: salvar no s3
+                    /*$pastaDoArquivoNaS3 = Storage::disk('s3')->put("Fotos/", $file);*/
 
-                $linkDaFoto = 'storage/' . $imagemUrn;
-                $post->extensao = $request->file('arquivo')->getClientOriginalExtension();
+                    $imagemUrn = $file->store('imagens', 'public');
 
-                $post->anexo = $linkDaFoto;
+                    $linkDaFoto = 'storage/' . $imagemUrn;
+                    $post->extensao = $request->file('arquivo')->getClientOriginalExtension();
+
+                    $post->anexo = $linkDaFoto;
+                }
+
+                $post->user_id = auth()->user()->id; 
+
+                $post->save();
+            } else {
+                return "Imagem ou vídeo enviado é maior do que 5mb.";
             }
-
-            $post->user_id = auth()->user()->id; 
-
-            $post->save();
+        } else {
+            return "Ocorreu um erro no servidor.";
         }
     }
 

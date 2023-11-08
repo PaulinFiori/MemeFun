@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\PostsServiceInterface;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostsController extends Controller
 {
@@ -21,9 +22,13 @@ class PostsController extends Controller
     }
 
     public function salvarNovoPost(Request $request) {
-        $this->postsService->salvarMeme($request);
+        $resposta = $this->postsService->salvarMeme($request);
 
-        return redirect()->route("home");
+        if($resposta != null) {
+            return redirect()->route("novo-post", ["erro" => Alert::error($resposta)]);
+        } else {
+            return redirect()->route("home");
+        }
     }
 
     public function memeEspecifico($id) {
