@@ -27,7 +27,7 @@
             @if(isset($memes))
                 @if(count($memes) > 0)
                     @foreach ($memes as $meme)
-                        <div class="row mt-1">
+                        <div class="row mt-1 pesquisa-dark">
                             <div class="col-2 col-sm-2 col-md-2 col-lg-2 heigth-120 mb-1">
                                 @if($meme->extensao == 'jpeg' || $meme->extensao == 'webp' || $meme->extensao == 'png' || $meme->extensao == 'jpg')
                                     <img class="img-fluid img-pesquisa" src="{{ config('app.url') . '/' . $meme->anexo }}" alt="Image">
@@ -66,7 +66,7 @@
             @if(isset($posts))
                 @if(count($posts) > 0)
                     @foreach ($posts as $post)
-                        <div class="row mt-1">
+                        <div class="row mt-1 pesquisa-dark">
                             <div class="col-2 col-sm-2 col-md-2 col-lg-2 heigth-120 mb-1">
                                 @if($post->extensao == 'jpeg' || $post->extensao == 'webp' || $post->extensao == 'png' || $post->extensao == 'jpg')
                                     <img class="img-fluid img-pesquisa" src="{{ config('app.url') . '/' . $post->anexo }}" alt="Image">
@@ -105,7 +105,7 @@
             @if(isset($contas))
                 @if(count($contas) > 0)
                     @foreach ($contas as $conta)
-                        <div class="row mt-1">
+                        <div class="row mt-1 pesquisa-dark">
                             <div class="col-2 col-sm-1 col-md-1 col-lg-1 mb-1" >
                                 @if($conta->foto != null)
                                     <img class="img-fluid rounded-circle img-pesquisa" src="{{ config('app.url') . '/' . $conta->foto }}" alt="Image">
