@@ -31,7 +31,7 @@
         [ Validate ]*/
         var input = $('.validate-input .input100');
 
-        $('.validate-form').on('submit',function(){
+        $('.validate-form').on('submit',function(event){
             var check = true;
 
             for(var i=0; i<input.length; i++) {
@@ -41,7 +41,23 @@
                 }
             }
 
-            return check;
+            formData = $(this)[0];
+            if(check) {
+                event.preventDefault();
+
+                $("#loading").removeClass("d-none");
+
+                $.ajax({
+                    url: event.target.action,
+                    data: $(this).serialize(),
+                    method: event.target.method,
+                    dataType: 'JSON',
+                    processData: false,
+                    success: function(res) {
+                        $("#loading").addClass("d-none");
+                    }
+                });
+            }
         });
 
 

@@ -11,9 +11,9 @@
             @csrf
 
             @if(auth()->user() != null)
-                <img src="{{ config('app.url'). '/' . auth()->user()->foto }}" class="rounded-circle mb-3" width="100px" heigth="100px">
+                <img src="{{ config('app.url'). '/' . auth()->user()->foto }}" class="rounded-circle mb-3 img-100px" width="100px" heigth="100px">
             @else
-                <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle mb-3" width="100px" heigth="100px">
+                <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle mb-3 100px" width="100px" heigth="100px">
             @endif
             <br>
 

@@ -26,7 +26,7 @@
             <span class="font-weight-bold link-perfil name-perfil"
                 @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
                 text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" >
+                1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" >
                 {{ $usuario->name }} @endif
             </span>
 
@@ -43,14 +43,14 @@
                     <span class="font-weight-bold link-perfil cursor-pointer float-right seguir" onclick="seguir({{$usuario->id}})"
                         @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
                         text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                        1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" @endif >
+                        1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif >
                         <i class="fa-solid fa-user-plus"></i>
                     </span>
                 @elseif(auth()->user()->id != $usuario->id && $segue)
                     <span class="font-weight-bold link-perfil cursor-pointer float-right seguir" onclick="deseguir({{$usuario->id}})"
                         @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
                         text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                        1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" @endif >
+                        1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif >
                         <i class="fa-solid fa-user-minus"></i>
                     </span>
                 @elseif(auth()->user()->id == $usuario->id)
@@ -58,28 +58,34 @@
                         <form method="POST" action="{{ route('logout') }}" class="font-weight-bold link-perfil-sair cursor-pointer float-right seguir d-block d-lg-none">
                             @csrf
                             <span class="font-weight-bold link-perfil-sair cursor-pointer float-right seguir mx-3" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <i class="fa-solid fa-right-from-bracket" @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
+                                    text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
+                                    1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif>
+                                </i>
                             </span>
                         </form>
-                        <span class="font-weight-bold link-perfil edit-icon cursor-pointer float-right seguir margin-edit" onclick="window.location.href = '{{ route('editar-perfil') }}'"
-                            @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
-                            text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                            1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" @endif >
-                            <i class="fa-solid fa-pen-to-square"></i>
+                        <span class="font-weight-bold link-perfil edit-icon cursor-pointer float-right seguir margin-edit" onclick="window.location.href = '{{ route('editar-perfil') }}'">
+                            <i class="fa-solid fa-pen-to-square"
+                                @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
+                                text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
+                                1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif>
+                            </i>
                         </span>
 
-                        <a class="font-weight-bold link-perfil cursor-pointer float-right seguir mx-3 d-block d-lg-none" href="{{route('ranking')}}"
-                            @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
-                            text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                            1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" @endif >
-                            <i class="fa-solid fa-trophy"></i>
+                        <a class="font-weight-bold link-perfil cursor-pointer float-right seguir mx-3 d-block d-lg-none" href="{{route('ranking')}}">
+                            <i class="fa-solid fa-trophy"
+                                @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
+                                text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
+                                1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif>
+                            </i>
                         </a>
 
-                        <a class="font-weight-bold link-perfil cursor-pointer float-right seguir d-block d-lg-none" href="{{route('configuracoes')}}"
-                            @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
-                            text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                            1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" @endif >
-                            <i class="fa-solid fa-gear"></i>
+                        <a class="font-weight-bold link-perfil cursor-pointer float-right seguir d-block d-lg-none" href="{{route('configuracoes')}}">
+                            <i class="fa-solid fa-gear"
+                                @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
+                                text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
+                                1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif>
+                            </i>
                         </a>
                     </div>
                 @endif
@@ -88,7 +94,7 @@
             <div class="d-flex user-infos text-center">
                 <a class="mx-5 link-abas" @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
                     text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                    1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" @endif
+                    1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif
                     href="?posts">
                     {{ count($usuario->memes) }} 
                     <br> 
@@ -104,7 +110,7 @@
                 </a>
                 <a class="mx-5 link-abas" @if($usuario->configuracao) style="color: {{ $usuario->configuracao->texto_cor }} !important; 
                     text-shadow: 2px 0 {{ $usuario->configuracao->borda_texto_cor }}, -2px 0 {{ $usuario->configuracao->borda_texto_cor }}, 0 2px {{ $usuario->configuracao->borda_texto_cor }}, 0 -2px {{ $usuario->configuracao->borda_texto_cor }},
-                    1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }}; !important" @endif
+                    1px 1px {{ $usuario->configuracao->borda_texto_cor }}, -1px -1px {{ $usuario->configuracao->borda_texto_cor }}, 1px -1px {{ $usuario->configuracao->borda_texto_cor }}, -1px 1px {{ $usuario->configuracao->borda_texto_cor }} !important;" @endif
                     href="?seguindo">
                     {{ count($usuario->seguindo) }} 
                     <br> 

@@ -42,6 +42,8 @@ class PostsService implements PostsServiceInterface
 
             $file = $request->file('arquivo');
 
+            if($file == null) return "Imagem ou vídeo não adicionado.";
+
             //todo: salvar no s3
             /*$pastaDoArquivoNaS3 = Storage::disk('s3')->put("Fotos/", $file);*/
 
