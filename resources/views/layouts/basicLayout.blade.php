@@ -24,6 +24,9 @@
         <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 
         <script src="{{ asset('js/clipboard.js') }}"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
         
     </head>
 
@@ -35,5 +38,7 @@
         @yield('conteudo')
 
         @include('layouts._partials.footer')
+
+        @include('layouts._partials.loading')
     </body>
 </html>

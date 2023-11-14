@@ -321,3 +321,8 @@ iframe {
     visibility: visible;
     opacity: 1;
 }
+
+.img-100px {
+    width: 100px;
+    height: 100px;
+}

@@ -50,6 +50,8 @@
         let corBordaTexto = null;
 
         function salvarConfiguracoes() {
+            $("#loading").removeClass("d-none");
+
             $.ajax({
                 type: "POST",
                 url: "{{ route('salvar-configuracoes') }}",
@@ -61,6 +63,7 @@
                     "bordaTexto": corBordaTexto
                 },
                 success: function() {
+                    $("#loading").addClass("d-none");
                     window.location.reload();
                 }
             });
