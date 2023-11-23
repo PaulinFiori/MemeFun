@@ -14,7 +14,7 @@ class SeguidoresService implements SeguidoresServiceInterface
             ->join('seguidores', 'users.id', '=', 'seguidores.user_id')
             ->where('seguidores.seguido_por', 0)
             ->orderBy("meme.created_at", "desc")
-            ->get();
+            ->paginate(10);
         }
 
         return Meme::select('meme.*')
@@ -22,6 +22,6 @@ class SeguidoresService implements SeguidoresServiceInterface
             ->join('seguidores', 'users.id', '=', 'seguidores.user_id')
             ->where('seguidores.seguido_por', auth()->user()->id)
             ->orderBy("meme.created_at", "desc")
-            ->get();
+            ->paginate(10);
     }
 }

@@ -5,7 +5,7 @@
 @section('conteudo')
     <link rel="stylesheet" href="{{ asset('css/comunidade.css') }}"/>
 
-    <div class="container mt-3">
+    <div class="container mt-3" id="posts-container">
         <div class="row mb-5">
             <div class="filter shadow-lg bg-white float-right d-flex align-items-center justify-content-center">
                 @if(!isset($_GET['filtro']) || $_GET['filtro'] == "ultimas")
@@ -250,6 +250,10 @@
                     </div>
                 </div>
             @endforeach
+
+            <div class="d-none">
+                {{ $posts->links() }}
+            </div>
         @else
             <p class="font-weight-bold text-center mb-3 mt-3">Não há post aqui.</p>
         @endif
@@ -264,6 +268,34 @@
     <script>
         let comentarioResponder = null;
         
+        $(document).ready(function() {
+            let nextPageUrl = '{{ $posts->nextPageUrl() }}';
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                    if (nextPageUrl) {
+                        loadMoreMemes();
+                    }
+                }
+            });
+
+            function loadMoreMemes() {
+                $.ajax({
+                    url: nextPageUrl,
+                    type: 'get',
+                    beforeSend: function () {
+                        nextPageUrl = '';
+                    },
+                    success: function (data) {
+                        nextPageUrl = data.nextPageUrl;
+                        $('#posts-container').append(data.view);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erro ao carregar mais posts:", error);
+                    }
+                });
+            }
+        });
+
         function curtiPost(postId, curtida) {
             $.ajax({
                 type: "POST",

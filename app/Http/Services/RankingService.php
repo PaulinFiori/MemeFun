@@ -4,10 +4,11 @@ namespace App\Http\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RankingService implements RankingServiceInterface
 {
-    public function montarRanking() {
+    public function montarRanking(Request $request) {
         //Memes +10
         //Curtidas no meme + 10
         //Comentarios no meme + 10
@@ -51,7 +52,18 @@ class RankingService implements RankingServiceInterface
                 FROM users u
             ) AS user_points
             ORDER BY pontos DESC');
+        
+        $ranking = $this->arrayPaginator($ranking, $request);
 
         return $ranking;
+    }
+
+    public function arrayPaginator($array, $request) {
+        $page = $request->input('page', 1);
+        $perPage = 10;
+        $offset = ($page * $perPage) - $perPage;
+
+        return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
+            ['path' => $request->url(), 'query' => $request->query()]);
     }
 }

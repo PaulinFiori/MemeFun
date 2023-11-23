@@ -18,7 +18,7 @@
     @endphp
     <div class="container-fluid">
         <div class="banner" style="background-image: url({{ $banner }});">
-            @if($usuario != null)
+            @if($usuario->foto != null)
                 <img src="{{ config('app.url'). '/' . $usuario->foto }}" class="rounded-circle" width="100px" heigth="100px">
             @else
                 <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle" width="100px" heigth="100px">
@@ -123,10 +123,10 @@
             @component('layouts._components.perfil_posts', ['memes' => $memes, 'usuario' => $usuario])
             @endcomponent
         @elseif(isset($_GET["seguidores"]))
-            @component('layouts._components.perfil_seguidores', ['usuario' => $usuario])
+            @component('layouts._components.perfil_seguidores', ['seguidores' => $seguidores])
             @endcomponent
         @elseif(isset($_GET["seguindo"]))
-            @component('layouts._components.perfil_seguindo', ['usuario' => $usuario])
+            @component('layouts._components.perfil_seguindo', ['seguindos' => $seguindos])
             @endcomponent
         @endif
     </div>

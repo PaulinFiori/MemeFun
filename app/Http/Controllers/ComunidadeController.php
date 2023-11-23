@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Http\Services\ComunidadeServiceInterface;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,8 +16,13 @@ class ComunidadeController extends Controller
         $this->comunidadeService = $comunidadeService;
     }
 
-    public function comunidades() {
+    public function comunidades(Request $request) {
         $posts = $this->comunidadeService->buscarPostComunidade();
+
+        if($request->ajax()) {
+            $view = view('layouts._components.posts', compact('posts'))->render();
+            return Response::json(['view' => $view, 'nextPageUrl' => $posts->nextPageUrl()]);
+        }
 
         return view("comunidade", ["posts" => $posts]);
     }

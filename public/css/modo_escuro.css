@@ -33,7 +33,7 @@ em {
 }
 
 .nav-link {
-    color: lightgray;
+    color: white;
 }
 
 .bg-white {
@@ -76,10 +76,6 @@ em {
 }
 
 .search button i {
-    color: #949698 !important;
-}
-
-.nav-link {
     color: #949698 !important;
 }
 
