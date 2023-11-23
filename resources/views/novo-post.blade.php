@@ -14,7 +14,7 @@
 
             <div class="wrap-input100 validate-input" data-validate="Selecione uma imagem">
                 <input class="input100" type="file" name="arquivo" accept="image/*, video/*">
-                <span class="focus-input100" data-placeholder="Arquivo"></span>
+                <span class="focus-input100"></span>
             </div>
 
             <div class="wrap-input100 validate-input" data-validate="Digite um título">
@@ -30,7 +30,7 @@
             <div class="container-login100-form-btn">
                 <div class="wrap-login100-form-btn">
                     <div class="login100-form-bgbtn"></div>
-                    <button type="submit" class="login100-form-btn">
+                    <button id="SalvarMeme" type="submit" class="login100-form-btn">
                         Salvar
                     </button>
                 </div>

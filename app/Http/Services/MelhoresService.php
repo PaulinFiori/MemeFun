@@ -20,7 +20,7 @@ class MelhoresService implements MelhoresServiceInterface
             ->whereBetween('meme.created_at', [$limite, $hoje])
             ->groupBy('meme.id')
             ->orderBy(DB::raw('COUNT(curtida_meme.meme_id)'), 'desc')
-            ->get();
+            ->paginate(10);
 
         return $memes_populares;
     }

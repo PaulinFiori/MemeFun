@@ -1,11 +1,13 @@
-#banner {
-    width: 100%;
-    height: 150px;
-    background-size: cover;
+body {
+    overflow-x: hidden;
 }
 
-.banner-info {
-    margin-top: -126px;
+.banner {
+    width: 100vw;
+    height: 150px;
+    background-size: cover;
+    margin-left: -12px;
+    margin-right: -12px;
 }
 
 .user-infos {
@@ -39,19 +41,85 @@
     text-decoration: none;
 }
 
-.name-perfil {
-    color: yellow;
+.link-perfil-sair {
+    color: red !important;
     text-decoration: none;
-    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+.name-perfil {
+    color: black;
+    text-decoration: none;
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+        1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
 }
 
 .seguir {
-    color: yellow;
-    text-shadow: black 0.1em 0.1em 0.2em;
+    color: black;
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+        1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    margin-right: 20px;
 }
 
 .link-abas {
-    color: yellow;
+    color: black;
     font-weight: bold;
     text-decoration: none;
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+        1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+
+.filter {
+    width: max-content;
+    padding: 3px;
+}
+
+@media screen and (min-width: 992px) {
+    .margin-edit {
+        margin-right: 2rem!important;
+        margin-left: 2rem!important;
+    }
+
+    .edit-icon {
+        margin-top: -96px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .filter {
+        margin-left: 82vw !important;
+    }
+
+    .links-banner {
+        float: right;
+        top: 0;
+        position: absolute;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .filter {
+        margin-left: 77vw !important;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .filter {
+        margin-left: 62vw !important;
+    }
+
+    .user-infos {
+        margin-left: 0%;
+        margin-top: 0px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mx-5 {
+        margin-right: 2rem!important;
+        margin-left: 2rem!important;
+    }
 }

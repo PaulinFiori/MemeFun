@@ -10,8 +10,6 @@ use App\Http\Services\HomeService;
 use App\Http\Services\HomeServiceInterface;
 use App\Http\Services\MelhoresService;
 use App\Http\Services\MelhoresServiceInterface;
-use App\Http\Services\NotificacaoService;
-use App\Http\Services\NotificacaoServiceInterface;
 use App\Http\Services\PerfilService;
 use App\Http\Services\PerfilServiceInterface;
 use App\Http\Services\PostsService;
@@ -26,6 +24,11 @@ use App\Http\Services\CadastrarService;
 use App\Http\Services\CadastrarServiceInterface;
 use App\Http\Services\RecuperarSenhaService;
 use App\Http\Services\RecuperarSenhaServiceInterface;
+use App\Http\Services\PesquisaServiceInterface;
+use App\Http\Services\PesquisaService;
+use App\Http\Services\ConfiguracoesServiceInterface;
+use App\Http\Services\ConfiguracoesService;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,7 +42,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ComunidadeServiceInterface::class, ComunidadeService::class);
         $this->app->bind(HomeServiceInterface::class, HomeService::class);
         $this->app->bind(MelhoresServiceInterface::class, MelhoresService::class);
-        $this->app->bind(NotificacaoServiceInterface::class, NotificacaoService::class);
         $this->app->bind(PerfilServiceInterface::class, PerfilService::class);
         $this->app->bind(PostsServiceInterface::class, PostsService::class);
         $this->app->bind(RankingServiceInterface::class, RankingService::class);
@@ -47,6 +49,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LoginServiceInterface::class, LoginService::class);
         $this->app->bind(CadastrarServiceInterface::class, CadastrarService::class);
         $this->app->bind(RecuperarSenhaServiceInterface::class, RecuperarSenhaService::class);
+        $this->app->bind(PesquisaServiceInterface::class, PesquisaService::class);
+        $this->app->bind(ConfiguracoesServiceInterface::class, ConfiguracoesService::class);
     }
 
     /**
@@ -56,6 +60,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }

@@ -9,6 +9,7 @@ use App\Models\ComentarioPost;
 use App\Mail\RepotarComentarioPost;
 use App\Mail\RepotarPost;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ComunidadeService implements ComunidadeServiceInterface
 {
@@ -17,7 +18,30 @@ class ComunidadeService implements ComunidadeServiceInterface
     }
 
     public function buscarPostComunidade() {
-        return Post::orderBy("id", "desc")->get();
+        $post;
+        
+        if(!isset($_GET['filtro']) || $_GET['filtro'] == "ultimas") {
+            $post = Post::orderBy("id", "desc")->paginate(10);
+        } else if(isset($_GET['filtro']) && $_GET['filtro'] == "top") {
+            $periodo = 7; // número de dias
+            $hoje = date('Y-m-d'); // data atual
+            $limite = date('Y-m-d', strtotime("-$periodo days")); // data limite
+
+            $post = Post::join('curtida_post', 'post.id', '=', 'curtida_post.post_id')
+                ->select('post.*')
+                ->whereBetween('post.created_at', [$limite, $hoje])
+                ->groupBy('post.id')
+                ->orderBy(DB::raw('COUNT(curtida_post.post_id)'), 'desc')
+                ->paginate(10);
+        } else if(isset($_GET['filtro']) && $_GET['filtro'] == "seguindo") {
+            $post = Post::select("post.*")
+                ->join('seguindo', 'post.user_id', '=', 'seguindo.user_seguindo')
+                ->where('seguindo.user_id', auth()->user()->id)
+                ->orderBy("id", "desc")
+                ->paginate(10);
+        }
+
+        return $post;
     }
 
     public function buscarComentario($id) {
@@ -34,29 +58,37 @@ class ComunidadeService implements ComunidadeServiceInterface
 
     public function salvarPostComunidade($request) {
         if($request->_token != null) {
-            $post = new Post();
+            $tamanhoArquivo = (filesize($request->file('arquivo')) / 1024) / 1024;
 
-            if($request->titulo) $post->titulo = $request->titulo;
+            if($tamanhoArquivo < 5.0) {
+                $post = new Post();
 
-            $post->descricao = $request->descricao;
+                if($request->titulo) $post->titulo = $request->titulo;
 
-            if($request->arquivo != null) {
-                $file = $request->file('arquivo');
+                $post->descricao = $request->descricao;
 
-                //todo: salvar no s3
-                /*$pastaDoArquivoNaS3 = Storage::disk('s3')->put("Fotos/", $file);*/
+                if($request->arquivo != null) {
+                    $file = $request->file('arquivo');
 
-                $imagemUrn = $file->store('imagens', 'public');
+                    //todo: salvar no s3
+                    /*$pastaDoArquivoNaS3 = Storage::disk('s3')->put("Fotos/", $file);*/
 
-                $linkDaFoto = 'storage/' . $imagemUrn;
-                $post->extensao = $request->file('arquivo')->getClientOriginalExtension();
+                    $imagemUrn = $file->store('imagens', 'public');
 
-                $post->anexo = $linkDaFoto;
+                    $linkDaFoto = 'storage/' . $imagemUrn;
+                    $post->extensao = $request->file('arquivo')->getClientOriginalExtension();
+
+                    $post->anexo = $linkDaFoto;
+                }
+
+                $post->user_id = auth()->user()->id; 
+
+                $post->save();
+            } else {
+                return "Imagem ou vídeo enviado é maior do que 5mb.";
             }
-
-            $post->user_id = auth()->user()->id; 
-
-            $post->save();
+        } else {
+            return "Ocorreu um erro no servidor.";
         }
     }
 

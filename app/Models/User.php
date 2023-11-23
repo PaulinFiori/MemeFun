@@ -85,6 +85,10 @@ class User extends Authenticatable
         return $this->hasMany(UserTag::class);
     }
 
+    public function configuracao() {
+        return $this->hasOne(UserConfiguracoes::class);
+    }
+
     public function sendPasswordResetNotification($token) {
         $this->notify(new PasswordReset($token, $this->name));
     }

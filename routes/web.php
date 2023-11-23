@@ -12,6 +12,8 @@ use App\Http\Controllers\SeguidoresController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CadastrarController;
 use App\Http\Controllers\RecuperarSenhaController;
+use App\Http\Controllers\PesquisaController;
+use App\Http\Controllers\ConfiguracoesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,8 +52,6 @@ Route::controller(ComunidadeController::class)->group(function() {
     Route::post('/excluir-post-comunidade', 'excluirPostComunidade')->name("excluir-post-comunidade");
     Route::post('/excluir-comentario-comunidade', 'excluirComentarioComunidade')->name("excluir-comentario-comunidade");
     Route::post('/reportar-comentario-comunidade', 'reportarComentarioComunidade')->name("reportar-comentario-comunidade");
-
-    //post-especifico
 });
 
 Route::controller(PostsController::class)->group(function() {
@@ -69,17 +69,17 @@ Route::controller(PostsController::class)->group(function() {
     Route::post('/reportarComentario', 'reportarComentario')->name("reportarComentario");
 });
 
-Route::controller(NotificacaoController::class)->group(function() {
-    Route::get('/notificacao', 'notificacao')->name("notificacao");
-});
-
 Route::controller(PerfilController::class)->group(function() {
     Route::get('/perfil/{id}', 'perfil')->name("perfil");
     Route::get('/editar-perfil', 'editarPerfil')->name("editar-perfil");
     Route::post('/editar-perfil', 'salvarEditarPerfil')->name("editar-perfil");
-    Route::get('/configuracoes', 'configuracoes')->name("configuracoes");
     Route::post('/seguir', 'seguir')->name("seguir");
     Route::post('/deseguir', 'deseguir')->name("deseguir");
+});
+
+Route::controller(ConfiguracoesController::class)->group(function() {
+    Route::get('/configuracoes', 'configuracoes')->name("configuracoes");
+    Route::post('/configuracoes', 'salvarConfiguracoes')->name("salvar-configuracoes");
 });
 
 Route::controller(RankingController::class)->group(function() {
@@ -101,6 +101,10 @@ Route::controller(RecuperarSenhaController::class)->group(function() {
 
     Route::get('/recuperar-senha/nova-senha', 'novaSenha')->name("nova-senha");
     Route::post('/recuperar-senha/nova-senha', 'salvarSenha')->name("nova-senha");
+});
+
+Route::controller(PesquisaController::class)->group(function() {
+    Route::get('/pesquisa/{busca?}', 'pesquisa')->name("pesquisa");
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

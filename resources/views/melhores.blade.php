@@ -5,7 +5,27 @@
 @section('conteudo')
     <link rel="stylesheet" href="{{ asset('css/posts.css') }}"/>
 
-    <div class="container mt-3">
+    <div class="navbar-top d-flex d-lg-none justify-content-center align-items-center">
+        <div class="dropdown">
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Melhores
+                </a>
+
+                <div class="dropdown-menu dropwdown-meme">
+                    <a class="dropdown-item" href="{{route('home')}}">
+                        Início
+                    </a>
+                    <a class="dropdown-item" href="{{route('melhores')}}">
+                        Melhores
+                    </a>
+                    <a class="dropdown-item" href="{{route('seguidores')}}">
+                        Seguindo
+                    </a>
+                </div>
+            </div>
+    </div>
+
+    <div class="container mt-3" id="memes-container">
         @if(count($memes) > 0)
             @foreach ($memes as $meme)
                 <div class="row mb-5">
@@ -223,6 +243,10 @@
                     </div>
                 </div>
             @endforeach
+
+            <div class="d-none">
+                {{ $memes->links() }}
+            </div>
         @else
             <p class="font-weight-bold text-center mb-3 mt-3">Não há memes aqui.</p>
         @endif
@@ -237,6 +261,32 @@
                 toastr.info('Agora é so compartilhar.', 'Copiado com sucesso!');
                 e.clearSelection();
             });
+
+            let nextPageUrl = '{{ $memes->nextPageUrl() }}';
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                    if (nextPageUrl) {
+                        loadMoreMemes();
+                    }
+                }
+            });
+
+            function loadMoreMemes() {
+                $.ajax({
+                    url: nextPageUrl,
+                    type: 'get',
+                    beforeSend: function () {
+                        nextPageUrl = '';
+                    },
+                    success: function (data) {
+                        nextPageUrl = data.nextPageUrl;
+                        $('#memes-container').append(data.view);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erro ao carregar mais memes:", error);
+                    }
+                });
+            }
         });
 
         function curtiMeme(id) {

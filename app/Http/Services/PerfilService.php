@@ -38,6 +38,12 @@ class PerfilService implements PerfilServiceInterface
             $usuario->email = $request->email;
 
             if($request->foto != null) {
+                $tamanhoFoto = (filesize($request->file('foto')) / 1024) / 1024;
+
+                if($tamanhoFoto > 5.0) {
+                    return "Imagem enviada é maior do que 5mb.";
+                }
+
                 $file = $request->file('foto');
 
                 //todo: salvar no s3
@@ -51,6 +57,12 @@ class PerfilService implements PerfilServiceInterface
             }
 
             if($request->banner != null) {
+                $tamanhoBanner = (filesize($request->file('banner')) / 1024) / 1024;
+
+                if($tamanhoBanner > 5.0) {
+                    return "Imagem enviada é maior do que 5mb.";
+                }
+
                 $file = $request->file('banner');
 
                 //todo: salvar no s3
@@ -67,13 +79,27 @@ class PerfilService implements PerfilServiceInterface
             }
 
             $usuario->save();
-
-            return true;
+        } else {
+            return "Ocorreu um erro no servidor.";
         }
     }
 
     public function buscarMemes($id) {
-        return Meme::where("user_id", $id)->orderBy("created_at", "desc")->get();
+        $memes;
+
+        if(!isset($_GET['filtro']) || $_GET['filtro'] == "ultimas") {
+            $memes = Meme::where("user_id", $id)->orderBy("created_at", "desc")->paginate(10);
+        } else if(isset($_GET['filtro']) && $_GET['filtro'] == "populares") {
+            $memes = Meme::select('meme.*')
+                ->join('curtida_meme', 'meme.id', '=', 'curtida_meme.meme_id')
+                ->where('meme.user_id', $id)
+                ->whereNull('curtida_meme.deleted_at')
+                ->groupBy('meme.id')
+                ->orderBy(DB::raw('COUNT(curtida_meme.meme_id)'), 'desc')
+                ->paginate(10);
+        } 
+
+        return $memes;
     }
 
     public function buscarUsuario($id) {

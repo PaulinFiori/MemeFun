@@ -9,6 +9,6 @@ use App\Models\Meme;
 class HomeService implements HomeServiceInterface
 {
     public function buscarMemes() {
-        return Meme::orderBy("created_at", "desc")->get();
+        return Meme::orderBy("created_at", "desc")->paginate(10);
     }
 }

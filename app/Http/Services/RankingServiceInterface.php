@@ -6,4 +6,5 @@ use Illuminate\Http\Request;
 
 interface RankingServiceInterface
 {
+    function montarRanking(Request $request);
 }

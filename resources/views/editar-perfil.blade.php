@@ -11,19 +11,19 @@
             @csrf
 
             @if(auth()->user() != null)
-                <img src="{{ config('app.url'). '/' . auth()->user()->foto }}" class="rounded-circle mb-3" width="100px" heigth="100px">
+                <img src="{{ config('app.url'). '/' . auth()->user()->foto }}" class="rounded-circle mb-3 img-100px" width="100px" heigth="100px">
             @else
-                <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle mb-3" width="100px" heigth="100px">
+                <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle mb-3 100px" width="100px" heigth="100px">
             @endif
             <br>
 
             <div class="wrap-input100">
-                <input class="input100" type="file" name="foto">
+                <input class="input100" type="file" name="foto" accept="image/*">
                 <span class="focus-input100" data-placeholder="Foto"></span>
             </div>
 
             <div class="wrap-input100">
-                <input class="input100" type="file" name="banner">
+                <input class="input100" type="file" name="banner" accept="image/*">
                 <span class="focus-input100" data-placeholder="Banner"></span>
             </div>
 
@@ -47,7 +47,7 @@
                     <iconify-icon icon="zmdi:eye"></iconify-icon>
                 </span>
                 <input class="input100" type="password" name="password">
-                <span class="focus-input100" data-placeholder="Password"></span>
+                <span class="focus-input100" data-placeholder="Senha"></span>
             </div>
 
             <div class="container-login100-form-btn mb-5">

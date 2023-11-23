@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Http\Services\ComunidadeServiceInterface;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ComunidadeController extends Controller
 {
@@ -14,8 +16,13 @@ class ComunidadeController extends Controller
         $this->comunidadeService = $comunidadeService;
     }
 
-    public function comunidades() {
+    public function comunidades(Request $request) {
         $posts = $this->comunidadeService->buscarPostComunidade();
+
+        if($request->ajax()) {
+            $view = view('layouts._components.posts', compact('posts'))->render();
+            return Response::json(['view' => $view, 'nextPageUrl' => $posts->nextPageUrl()]);
+        }
 
         return view("comunidade", ["posts" => $posts]);
     }
@@ -32,43 +39,59 @@ class ComunidadeController extends Controller
 
 
     public function salvarNovoPostComunidade(Request $request) {
-        $this->comunidadeService->salvarPostComunidade($request);
+        $resposta = $this->comunidadeService->salvarPostComunidade($request);
 
-        return redirect()->route("comunidades");
+        if($resposta != null) {
+            return redirect()->route("novo-post-comunidade", ["erro" => Alert::error($resposta)]);
+        } else {
+            return redirect()->route("comunidades");
+        }
     }
 
     public function curtiPostComunidade(Request $request) {
-        $this->comunidadeService->curtiPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->curtiPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function comentarPostComunidade(Request $request) {
-        $this->comunidadeService->comentarPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->comentarPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function reportarPostComunidade(Request $request) {
-        $this->comunidadeService->reportarPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->reportarPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function excluirPostComunidade(Request $request) {
-        $this->comunidadeService->excluirPostComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->excluirPostComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function reportarComentarioComunidade(Request $request) {
-        $this->comunidadeService->reportarComentarioComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->reportarComentarioComunidade($request);
+        }
 
         return response()->json(true);
     }
 
     public function excluirComentarioComunidade(Request $request) {
-        $this->comunidadeService->excluirComentarioComunidade($request);
+        if($request->_token) {
+            $this->comunidadeService->excluirComentarioComunidade($request);
+        }
 
         return response()->json(true);
     }

@@ -31,6 +31,9 @@ class PostsService implements PostsServiceInterface
 
     public function salvarMeme($request) {
         if($request->_token) {
+            $tamanhoArquivo = (filesize($request->file('arquivo')) / 1024) / 1024;
+
+            if($tamanhoArquivo < 5.0) {
             $meme = new Meme();
 
             $meme->titulo = $request->titulo;
@@ -38,6 +41,8 @@ class PostsService implements PostsServiceInterface
             if($request->descricao) $meme->descricao = $request->descricao;
 
             $file = $request->file('arquivo');
+
+            if($file == null) return "Imagem ou vídeo não adicionado.";
 
             //todo: salvar no s3
             /*$pastaDoArquivoNaS3 = Storage::disk('s3')->put("Fotos/", $file);*/
@@ -52,6 +57,11 @@ class PostsService implements PostsServiceInterface
             $meme->user_id = auth()->user()->id;
 
             $meme->save();
+            } else {
+                return "Imagem ou vídeo enviado é maior do que 5mb.";
+            }
+        } else {
+            return "Ocorreu um erro no servidor.";
         }
     }
 

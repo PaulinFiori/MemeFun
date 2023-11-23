@@ -25,3 +25,7 @@
     background-color: initial;
     border-top: none;
 }
+
+.gray-card {
+    background-color: #ededed;
+}

@@ -1,0 +1,96 @@
+body {
+    background-color: #1e1f22;
+}
+
+p {
+    color: white !important;
+}
+
+span {
+    color: white !important;
+}
+
+i {
+    color: white !important;
+}
+
+a {
+    color: white !important;
+}
+
+em {
+    color: white !important;
+}
+
+.bg-light {
+    background-color: #949698 !important;
+    color: lightgray;
+}
+
+.form-control {
+    background-color: #949698 !important;
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+.bg-white {
+    background-color: #949698 !important;
+    color: white;
+}
+
+.media-body p, .media-body small span {
+    color: white !important;
+}
+
+.cardbox-base {
+    color: white !important;
+}
+
+.dropdown-menu {
+    background-color: #949698 !important;
+    color: white;
+}
+
+.dropdown-item a:hover {
+    background: gray !important;
+    color: black !important
+}
+
+.navbar-bottom a i {
+    color: #949698 !important;
+}
+
+.gray-card {
+    background-color: #949698 !important;
+}
+
+.new-post i {
+    color: #949698 !important;
+}
+
+.reply-comment {
+    color: black !important;
+}
+
+.search button i {
+    color: #949698 !important;
+}
+
+.pesquisa-dark p {
+    color: #949698 !important;
+}
+
+.pesquisa-dark a {
+    color: #949698 !important;
+}
+
+.pesquisa-dark i {
+    color: #949698 !important;
+}
+
+.page-link {
+    color: black !important;
+}

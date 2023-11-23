@@ -17,8 +17,7 @@ a {
     width: 32px;
     padding: 0;
     overflow: hidden;
-    color: #fff !important;
-    background: #b5b6b6;
+    color: black !important;
 
     display: flex;
     flex-direction: column;
@@ -107,11 +106,6 @@ a {
     display: flex;
     -ms-flex-align: start;
     align-items: flex-start;
-}
-
-.d-flex {
-    display: -ms-flexbox !important;
-    display: flex !important;
 }
 
 .media .mr-3 {
@@ -308,7 +302,42 @@ a {
     font-size: 16px;
     text-align: left;
 }
-   
+
+@media screen and (max-width: 1399px) and (min-width: 991px) {
+    .cardbox-comments {
+        padding: 10px 40px 20px 0px !important;
+    }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 991px) {
+    .search {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .cardbox-comments {
+        padding: 10px 40px 20px 40px !important;
+    }
+}
+
+@media screen and (max-width: 554px) {
+    .cardbox-comments {
+        padding: 10px 40px 20px 0px !important;
+    }
+}
+
+@media screen and (max-width: 515px) {
+    .search {
+        width: 220px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .search {
+        width: 195px;
+    }
+}
    
 /* ------------------------------- */
 /* Author

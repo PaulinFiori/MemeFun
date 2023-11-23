@@ -2,10 +2,11 @@
 /* Filter
 ---------------------------------- */
 .filter {
-    width: 100px;
     height: 50px;
     position: relative;
     left: 90% !important;  
+    width: max-content;
+    padding: 3px;
 }
 
 /* ------------------------------- */
@@ -23,8 +24,7 @@
     width: 32px;
     padding: 0;
     overflow: hidden;
-    color: #fff !important;
-    background: #b5b6b6;
+    color: black !important;
 
     display: flex;
     flex-direction: column;
@@ -116,11 +116,6 @@
     display: flex;
     -ms-flex-align: start;
     align-items: flex-start;
-}
-
-.d-flex {
-    display: -ms-flexbox !important;
-    display: flex !important;
 }
 
 .media .mr-3 {
@@ -386,4 +381,37 @@
 
 .new-post i {
     margin-top: 26px;
+}
+
+@media screen and (max-width: 991px) {
+    .new-post {
+        bottom: 60px;
+        right: 25px;
+    }
+
+    .filter {
+        left: 93% !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .new-post {
+        bottom: 60px;
+        right: 25px;
+    }
+
+    .filter {
+        left: 93% !important;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .new-post {
+        bottom: 60px;
+        right: 70px;
+    }
+
+    .filter {
+        left: 70% !important;
+    }
 }

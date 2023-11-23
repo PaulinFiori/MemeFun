@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-none d-lg-block">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
@@ -47,8 +47,10 @@
         <div class="d-flex align-items-center">
             <div class="container-fluid d-none d-md-flex">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Procurar memes ou usuários" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Procurar memes, usuários ou posts" id="busca" aria-label="Search">
+                    <button class="btn btn-outline-success" type="button" onclick="pesquisa()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </form>
             </div>
             
@@ -110,8 +112,66 @@
   </div>
 </nav>
 
+<div class="navbar-bottom d-flex d-lg-none justify-content-between align-items-center">
+    <a id='home-navbar-bottom' href="{{route('home')}}">
+        <i class="fa-solid fa-house"></i>
+    </a>
+    <a id='comunidade-navbar-bottom' href="{{route('comunidades')}}">
+        <i class="fa-solid fa-users"></i>
+    </a>
+    @if(auth()->user() != null)
+        <a id='pesquisar-navbar-bottom' href="{{ route('pesquisa') }}">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        
+        <a id='novo-meme-navbar-bottom' href="{{route('novo-post')}}">
+            <i class="fa-solid fa-plus"></i>
+        </a>
+    @endif
+
+    @if(auth()->user() != null)
+        @if(auth()->user()->foto != null)
+            <a id='perfil-navbar-bottom' href="{{route('perfil', [base64_encode(auth()->user()->id)])}}">
+                <img src="{{ config('app.url'). '/' . auth()->user()->foto }}" class="rounded-circle" height="25" alt="User Foto" loading="lazy"/>
+            </a>
+        @else
+            <a id='perfil-navbar-bottom' href="{{route('perfil', [base64_encode(auth()->user()->id)])}}">
+                <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle" height="25" alt="User Foto" loading="lazy"/>
+            </a>
+        @endif
+    @else
+        <a id='entrar-navbar-bottom' href="{{route('login')}}">
+            <img src="{{ asset('images/default-user.jpg') }}" class="rounded-circle" height="25" alt="User Photo" loading="lazy"/>
+        </a>
+    @endif
+</div>
+
 <script>
     toastr.options = {
         "progressBar": true
+    }
+
+    $(document).ready(function() {
+        if(window.location.href.includes("home")) {
+            $("#home-navbar-bottom").toggleClass("active");
+        } else if(window.location.href.includes("comunidade")) {
+            $("#comunidade-navbar-bottom").toggleClass("active");
+        } else  if(window.location.href.includes("pesquisa")) {
+            $("#pesquisar-navbar-bottom").toggleClass("active");
+        }else if(window.location.href.includes("novo-post")) {
+            $("#novo-meme-navbar-bottom").toggleClass("active");
+        } else if(window.location.href.includes("perfil")) {
+            $("#perfil-navbar-bottom").toggleClass("active");
+        } else if(window.location.href.includes("login")) {
+            $("#entrar-navbar-bottom").toggleClass("active");
+        } else {
+            $("#home-navbar-bottom").toggleClass("active");
+        }
+    });
+
+    function pesquisa() {
+        let busca = $("#busca").val();
+
+        window.location.href = "{{ route('pesquisa') }}/" + busca;
     }
 </script>
