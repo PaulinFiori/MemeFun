@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Services\PerfilServiceInterface;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,15 +18,42 @@ class PerfilController extends Controller
     }
 
 
-    public function perfil() {
+    public function perfil(Request $request) {
         $id = explode('perfil/', url()->current())[1];
         $memes = $this->perfilService->buscarMemes(base64_decode($id));
         $usuario = $this->perfilService->buscarUsuario(base64_decode($id));
+        $seguindos = $usuario->seguindo()->paginate(10);
+        $seguidores = $usuario->seguidores()->paginate(10);
+
+        if($request->ajax()) {
+            if($_GET['tab'] == "seguidores") {
+                $view = view('layouts._components.seguidores', compact('seguidores'))->render();
+                return Response::json(['view' => $view, 'nextPageUrl' => $seguidores->nextPageUrl()]);
+            } else if($_GET['tab'] == "seguindo") {
+                $view = view('layouts._components.seguindo', compact('memes'))->render();
+                return Response::json(['view' => $view, 'nextPageUrl' => $seguindos->nextPageUrl()]);
+            } else {
+                $view = view('layouts._components.memes', compact('memes'))->render();
+                return Response::json(['view' => $view, 'nextPageUrl' => $memes->nextPageUrl()]);
+            }
+        }
 
         return view("perfil", [
             "memes" => $memes,
-            "usuario" => $usuario
+            "usuario" => $usuario,
+            "seguindos" => $seguindos,
+            "seguidores" => $seguidores
         ]);
+    }
+
+    public function seguidores(Request $request) {
+        $id = explode('perfil/', url()->current())[1];
+        $seguidores = $this->perfilService->seguidores(base64_decode($id));
+
+        if($request->ajax()) {
+            $view = view('layouts._components.seguidores', compact('seguidores'))->render();
+            return Response::json(['view' => $view, 'nextPageUrl' => $seguidores->nextPageUrl()]);
+        }
     }
 
     public function editarPerfil() {

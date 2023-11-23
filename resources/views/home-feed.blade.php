@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="container mt-3">
+    <div class="container mt-3" id="memes-container">
         @foreach ($memes as $meme)
             <div class="row mb-5">
                 <div class="col-lg-6 offset-lg-3">
@@ -243,6 +243,10 @@
                 </div>
             </div>
         @endforeach
+
+        <div class="d-none">
+            {{ $memes->links() }}
+        </div>
     </div>
 
     <script>
@@ -254,6 +258,32 @@
                 toastr.info('Agora é so compartilhar.', 'Copiado com sucesso!');
                 e.clearSelection();
             });
+
+            let nextPageUrl = '{{ $memes->nextPageUrl() }}';
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                    if (nextPageUrl) {
+                        loadMoreMemes();
+                    }
+                }
+            });
+
+            function loadMoreMemes() {
+                $.ajax({
+                    url: nextPageUrl,
+                    type: 'get',
+                    beforeSend: function () {
+                        nextPageUrl = '';
+                    },
+                    success: function (data) {
+                        nextPageUrl = data.nextPageUrl;
+                        $('#memes-container').append(data.view);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erro ao carregar mais memes:", error);
+                    }
+                });
+            }
         });
 
         function curtiMeme(id) {

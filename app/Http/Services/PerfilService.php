@@ -88,7 +88,7 @@ class PerfilService implements PerfilServiceInterface
         $memes;
 
         if(!isset($_GET['filtro']) || $_GET['filtro'] == "ultimas") {
-            $memes = Meme::where("user_id", $id)->orderBy("created_at", "desc")->get();
+            $memes = Meme::where("user_id", $id)->orderBy("created_at", "desc")->paginate(10);
         } else if(isset($_GET['filtro']) && $_GET['filtro'] == "populares") {
             $memes = Meme::select('meme.*')
                 ->join('curtida_meme', 'meme.id', '=', 'curtida_meme.meme_id')
@@ -96,7 +96,7 @@ class PerfilService implements PerfilServiceInterface
                 ->whereNull('curtida_meme.deleted_at')
                 ->groupBy('meme.id')
                 ->orderBy(DB::raw('COUNT(curtida_meme.meme_id)'), 'desc')
-                ->get();
+                ->paginate(10);
         } 
 
         return $memes;

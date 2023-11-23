@@ -21,7 +21,7 @@ class ComunidadeService implements ComunidadeServiceInterface
         $post;
         
         if(!isset($_GET['filtro']) || $_GET['filtro'] == "ultimas") {
-            $post = Post::orderBy("id", "desc")->get();
+            $post = Post::orderBy("id", "desc")->paginate(10);
         } else if(isset($_GET['filtro']) && $_GET['filtro'] == "top") {
             $periodo = 7; // número de dias
             $hoje = date('Y-m-d'); // data atual
@@ -32,13 +32,13 @@ class ComunidadeService implements ComunidadeServiceInterface
                 ->whereBetween('post.created_at', [$limite, $hoje])
                 ->groupBy('post.id')
                 ->orderBy(DB::raw('COUNT(curtida_post.post_id)'), 'desc')
-                ->get();
+                ->paginate(10);
         } else if(isset($_GET['filtro']) && $_GET['filtro'] == "seguindo") {
             $post = Post::select("post.*")
                 ->join('seguindo', 'post.user_id', '=', 'seguindo.user_seguindo')
                 ->where('seguindo.user_id', auth()->user()->id)
                 ->orderBy("id", "desc")
-                ->get();
+                ->paginate(10);
         }
 
         return $post;
